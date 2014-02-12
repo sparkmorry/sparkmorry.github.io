@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Mac | Morry's Blog]]></title>
+  <link href="http://sparkmorry.github.io/blog/categories/mac/atom.xml" rel="self"/>
+  <link href="http://sparkmorry.github.io/"/>
+  <updated>2014-02-13T00:33:18+08:00</updated>
+  <id>http://sparkmorry.github.io/</id>
+  <author>
+    <name><![CDATA[Mengli Xia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[在Mac环境下跑汇编]]></title>
+    <link href="http://sparkmorry.github.io/blog/2013/12/30/zai-machuan-jing-xia-pao-hui-bian/"/>
+    <updated>2013-12-30T23:12:34+08:00</updated>
+    <id>http://sparkmorry.github.io/blog/2013/12/30/zai-machuan-jing-xia-pao-hui-bian</id>
+    <content type="html"><![CDATA[<p>今天汇编作业做到第七章，就想在Mac下跑自己的asm程序，看到了一个很好的<a href="http://www.raywenderlich.com/37181/ios-assembly-tutorial">教程</a></p>
+
+<p>虽然对自己没有用，但是对汇编又有了一次了解，一些嵌入式设备系统如ios之类的是主要基于arm体系结构的操作系统，而pc机上的大多是基于intel体系结构的操作系统。查到了几种编译汇编代码的方式：</p>
+
+<ol>
+<li><p>用nasm直接编译.asm文件：</p>
+
+<p>  nasm -f macho hello.asm</p>
+
+<p> 生成可执行文件：</p>
+
+<p>  ld -o hello -e mystart hello.o</p>
+
+<p>  运行</p>
+
+<p> ./hello</p>
+
+<p> 检查退出</p>
+
+<p> echo $?</p></li>
+<li><p>用gcc在.c文件中嵌套asm代码：</p>
+
+<p> gcc -Wall -m32 -O3 -fasm-blocks convert.c -o convert</p>
+
+<p> 运行</p>
+
+<p> ./convert</p></li>
+<li><p>本来想直接运行书里的代码，但是发现书里的代码都是用masm语法编程的，所谓masm就是windows平台下的汇编编译器（对应linux下是nasm），所以在自己的电脑上就坑爹的跑不起来了，但是查到还是可以用一些如DOSbox的工具编译的asm文件然后和c文件连起来的。下了DOSbox，还要配置实在有些麻烦就想着还是明天去实验室做大程的时候顺便写吧，懒得折腾了。</p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

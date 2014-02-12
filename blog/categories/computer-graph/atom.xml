@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Computer Graph | Morry's Blog]]></title>
+  <link href="http://sparkmorry.github.io/blog/categories/computer-graph/atom.xml" rel="self"/>
+  <link href="http://sparkmorry.github.io/"/>
+  <updated>2014-02-13T00:33:18+08:00</updated>
+  <id>http://sparkmorry.github.io/</id>
+  <author>
+    <name><![CDATA[Mengli Xia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Cardinal样条曲线的Javascript实现(理论篇)]]></title>
+    <link href="http://sparkmorry.github.io/blog/2014/01/29/cardinalyang-tiao-qu-xian-de-javascriptshi-xian-li-lun-pian/"/>
+    <updated>2014-01-29T00:46:42+08:00</updated>
+    <id>http://sparkmorry.github.io/blog/2014/01/29/cardinalyang-tiao-qu-xian-de-javascriptshi-xian-li-lun-pian</id>
+    <content type="html"><![CDATA[<p>首先，要对样条曲线进行插值的原因是：希望通过给定的关键帧点生成一条希望的直线或者曲线。</p>
+
+<p>1.直线插值</p>
+
+<p>　　生成一条直线，给定直线首尾的关键点P0,P1，就能确定这条直线的特性，比如y=kx+b中的斜率k和y轴偏移值b。通过线性（P0,P1线性相关）插值（线性的给中间插上一定数量的点使看起来连续）的方式就可以得到我们要的线段。
+<img src="http://sparkmorry.github.io/images/posts/Cardinal/linear.png" style="width:400px;"></img></br>
+　　　　　　　　　　图1.1</p>
+
+<p>2.曲线插值</p>
+
+<p>　　但是对于曲线来说比较难确定，我们要对于给定的参数生成唯一的一条曲线并且可以进行方便的调整。这里要确定每一小段曲线，我们需要4个参数，首尾点的位置(参数化后的P(u))及他们的方向（在代数上表现为一阶导数P'(u)的值），并进行平滑的过渡，通过插值来实现对中间点的计算。再将每个小段的曲线进行连接。<br>
+<img src="http://sparkmorry.github.io/images/posts/Cardinal/segment.png" style="width:220px;"></img></br>
+　　　　　图2.1</p>
+
+<p>　　曲线的生成分为两个部分：</p>
+
+<p>　　　　1)对每给定的两个关键帧点之间进行插值得到一段曲线（如图2.1）</br>
+　　　　2)连接两两关键帧点的曲线段（如图2.2对曲线段进行连接）<br></p>
+
+<p><img src="http://sparkmorry.github.io/images/posts/Cardinal/kp.png" style="width:400px;"></img></br>
+　　　　　　　　图2.2</p>
+
+<p>2.1 三次多项式插值</p>
+
+<p>　　先就两个关键帧点之间的插值做计算。我的理解主要的思想是通过一个参数化的函数曲线去拟合，因此要通过给定的条件（如图2.1中的P(0),P(1),P'(0),P'(1)）去确定这个函数的几个系数。然后通过在中间等间距的插点计算根据函数得到的值确定点的位置。这里选择参数化的三次多项式(）去拟合这条曲线，通过插值来求得中间点的位置。这里，选择三次多项式的原因是：灵活性和计算速度的折中方案。</p>
+
+<p>　　1)与更高次多项式相比，三次样条只需较少的计算与存储空间，并且较为稳定；（只需要一个4*4的基函数矩阵）</br>
+　　2)与更低次多项式相比，三次样条在模拟任何曲线形状时显得更灵活。（能满足大多数情况下的曲率调整，比如二次抛物线太对称，一次就是直线）</br></p>
+
+<p>2.2 曲线连续性</p>
+
+<p>　　为了保证分段参数曲线从一段到另一端平滑过渡，可以在连接点处要求各种连续性（可以参考微积分中的函数连续性与导数的关系）。</p>
+
+<p>　　C0连续：有相同的公共点，如图(a)</br>
+　　C1连续：有相同的公共点且公共点处有相同的一阶导数（切线斜率），如图(b)</br>
+　　C2连续：有相同的公共点且有相同的公共点且公共点处有相同的一阶导数和二阶导数（切线斜率的变化率），如图c <br>
+<img src="http://sparkmorry.github.io/images/posts/Cardinal/conti.png" style="width:400px;"></img></br>
+　　　　　　　　　　图2.3</p>
+
+<p>2.3 自然样条曲线</p>
+
+<p>　　一种简单的插值方法是自然样条插值，就是对如图2.2的一条有n+1个控制点（P0～Pn）n个分段的曲线求三次多项式系数这样就有4n个系数要确定（需要列出4n个方程才能求解出来），通过曲线内部的n－1个点每相邻曲线段公共点的一阶及二阶导数相等且都通过该点，能确定4n－4 [4*(n-1)]个方程，再加上两个“隐含”控制点P0和Pn的二阶导数为0得到4n个方程来求解。缺点是一个点发生了变化其他点都跟着受到影响，这里不做主要展开了。　　　　　　　　　　　　</p>
+
+<p>2.4 Hermite插值</p>
+
+<p>　　为了解决自然样条曲线不能局部控制的缺点，Hermite插值对每个控制点的切线进行了限制为D（由用户给出），这样切线就变成了D*Pk（D斜率＋经过该点），使每个曲线段仅依赖于端点位置的约束。如对每小段曲线的边界条件表示为：</br>
+<img src="http://sparkmorry.github.io/images/posts/Cardinal/hermite1.png" style="width:120px;"></img></br>
+公式1</p>
+
+<p>这里P是向量，对于xy分量来说分别都符合这个边界条件。那么如何保证曲线连续的呢？即对于一个连接点Pk-1来说，这段曲线相应的终点为Pk，在下一段曲线里Pk则作为这段曲线的起始点，保证Pk这个点的函数值和导数值相等就可以。现在点的位置都是Pk，导数值都是DPk，二阶导数值都是D。</p>
+
+<p>可以写出向量方程：</br>
+<img src="http://sparkmorry.github.io/images/posts/Cardinal/hermite2.png" style="width:300px;"></img></p>
+
+<p>其中P和abcd都是向量，可以再xy分量上（2维情况下）分别表达成这种形式，如，y分量也是类似，组合成的表达，可以获得等价的矩阵形式表达：</p>
+
+<p>以及导数的矩阵表达式：</br>
+<img src="http://sparkmorry.github.io/images/posts/Cardinal/hermite3.png" style="width:200px;"></img></p>
+
+<p>通过公式1，用u＝0和u＝1替代上面的u就可以得到以下方程：
+</br>
+<img src="http://sparkmorry.github.io/images/posts/Cardinal/hermite4.png" style="width:200px;"></img></br></p>
+
+<p>如Pk=P(0)=[0 0 0 1]*[a b c d]&lsquo;，这里每一个曲线段上的点都被参数化到0～1之间，所以起始点就是P(0),终止点就是P(1)，利用线代方法（参考线性方程求解）通过4个参数对多项式系数求解</p>
+
+<p>最后边界条件的表达式如下</br>
+<img src="http://sparkmorry.github.io/images/posts/Cardinal/Hermite1.png" style="width:150px;"></img></br></p>
+
+<p>其中M*P部分就是通过对Hermite函数推导得到的系数矩阵[a b c d]&lsquo;，Pk和Pk+1由用户给定，DPk和DPk+1由给定D值计算获得，根据不同的控制方式可以生成有不同曲线，Cardinal曲线就是Hermite曲线的一种变形，通过对切线斜率进行控制来控制曲线的平滑度。</p>
+
+<p>2.5 Cardinal样条曲线</p>
+
+<p> 　　因为在Hermite曲线中斜率D还是需要用户给出，Cardinal样条曲线可以由相邻两控制点坐标来计算斜率从而使曲线完全由控制点Pk来决定，但是在这里引入了一个t作为在每个公共点上尖锐程度的控制值。</p>
+
+<p>Cardinal曲线的边界条件方程：</br>
+<img src="http://sparkmorry.github.io/images/posts/Cardinal/Cardinal1.png" style="width:180px;"></img></br>
+这样控制点Pk和Pk+1处的斜率和弦PkPk+2和PkPk+1成正比（理解为表示比较接近的控制点对曲线曲率的影响）</br>
+<img src="http://sparkmorry.github.io/images/posts/Cardinal/Cardinal2.png" style="width:230px;"></img></br>
+其中t（称为张量）控制Cardinal样条和输入控制点之间的松紧程度，对曲线的影响程度可以通过下图看出来</br>
+<img src="http://sparkmorry.github.io/images/posts/Cardinal/Cardinal3.png" style="width:230px;"></img></br>
+通过跟Hermite类似的系数求解方式，将边界条件代入可以得到矩阵表达式：</p>
+
+<p>P(u)</br>
+<img src="http://sparkmorry.github.io/images/posts/Cardinal/Cardinal4.png" style="width:300px;"></img></br>
+<img src="http://sparkmorry.github.io/images/posts/Cardinal/Cardinal5.png" style="width:220px;"></img>，其中
+<img src="http://sparkmorry.github.io/images/posts/Cardinal/Cardinal6.png" style="width:220px;"></img></br></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,6 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://sparkmorry.github.io/blog/2013/11/12/steganography/</loc>
+        <lastmod>2014-02-13T00:00:25+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://sparkmorry.github.io/blog/2013/12/30/zai-machuan-jing-xia-pao-hui-bian/</loc>
+        <lastmod>2014-02-12T23:59:30+08:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://sparkmorry.github.io/blog/2014/01/29/cardinalyang-tiao-qu-xian-de-javascriptshi-xian-li-lun-pian/
+        </loc>
+        <lastmod>2014-02-13T00:33:18+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://sparkmorry.github.io/blog/2014/02/12/octopress-journey/</loc>
         <lastmod>2014-02-12T23:26:51+08:00</lastmod>
     </url>
@@ -10,11 +24,11 @@
     </url>
     <url>
         <loc>http://sparkmorry.github.io/blog/archives/</loc>
-        <lastmod>2014-02-12T23:26:51+08:00</lastmod>
+        <lastmod>2014-02-13T00:33:18+08:00</lastmod>
     </url>
     <url>
         <loc>http://sparkmorry.github.io/</loc>
-        <lastmod>2014-02-12T23:26:51+08:00</lastmod>
+        <lastmod>2014-02-13T00:33:18+08:00</lastmod>
     </url>
     <url>
         <loc>http://sparkmorry.github.io/painting/</loc>
