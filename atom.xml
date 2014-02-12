@@ -4,7 +4,7 @@
   <title><![CDATA[Morry's Blog]]></title>
   <link href="http://sparkmorry.github.io/atom.xml" rel="self"/>
   <link href="http://sparkmorry.github.io/"/>
-  <updated>2014-02-12T21:58:34+08:00</updated>
+  <updated>2014-02-12T23:20:16+08:00</updated>
   <id>http://sparkmorry.github.io/</id>
   <author>
     <name><![CDATA[Mengli Xia]]></name>
@@ -18,9 +18,30 @@
     <link href="http://sparkmorry.github.io/blog/2014/02/12/octopress-journey/"/>
     <updated>2014-02-12T16:42:24+08:00</updated>
     <id>http://sparkmorry.github.io/blog/2014/02/12/octopress-journey</id>
-    <content type="html"><![CDATA[<p>&nbsp;&nbsp;After one-day searching, I finally set up my own blog by octopress. It looks so amazing and I just fall in love with the green markdown at the first glance. I will just imigrate the previous blog <a href="http://www.cnblogs.com/sparkmorry/">http://www.cnblogs.com/sparkmorry/</a> @cnblog.</p>
+    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;After one-day searching, I finally set up my own blog by octopress. It looks so amazing and I just fall in love with the green markdown at the first glance. I will just imigrate the previous blog <a href="http://www.cnblogs.com/sparkmorry/">http://www.cnblogs.com/sparkmorry/</a> @cnblog here.</p>
 
-<p>This is just a testing post for</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;This is just a testing post where I learn how to write an article with markdown and post it under a certain page. According to the documentation of Octopress, to write a new post:</p>
+
+<pre><code>rake new_page[super-awesome]
+# creates /source/super-awesome/index.markdown
+
+rake new_page[super-awesome/page.html]
+# creates /source/super-awesome/page.html
+</code></pre>
+
+<p>to publish:</p>
+
+<pre><code>rake generate   # Generates posts and pages into the public directory
+rake watch      # Watches source/ and sass/ for changes and regenerates
+rake preview    # Watches, and mounts a webserver at http://localhost:4000
+rake deploy
+</code></pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;I have come across a problem of the blog configuration, the source code should be under the root directory for preview, or maybe by changing somewhere else. I am still in my process of learning this new awsome tool.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Here in my blog, the posts are relatively under <a href="http://sparkmorry.github.io/">Articles</a> and <a href="http://sparkmorry.github.io/thoughts/">Thoughts</a>. The articles are mainly about the reflections on front-end development and the thoughts are just small talks about my daily life. Also, you may see some recent work on drawings or photographies under <a href="http://sparkmorry.github.io/painting/">Gallery</a> as I really like both of them. For more infomation, plz see <a href="http://sparkmorry.github.io/about/">About page</a>. Thanks to github and octopress that I can set up the blog for free.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;And I am so pleasure of having your visit on this blog.</p>
 ]]></content>
   </entry>
   
