@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Morry's Blog]]></title>
-  <link href="http://sparkmorry.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Octopress | Morry's Blog]]></title>
+  <link href="http://sparkmorry.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://sparkmorry.github.io/"/>
   <updated>2014-02-12T21:58:34+08:00</updated>
   <id>http://sparkmorry.github.io/</id>
