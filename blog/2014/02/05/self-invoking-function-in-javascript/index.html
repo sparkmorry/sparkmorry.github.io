@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Mac - Morry's Blog</title>
+  <title>Self-invoking Function in Javascript - Morry's Blog</title>
   <meta name="author" content="Mengli Xia">
 
   
-  <meta name="description" content="Category: Mac">
+  <meta name="description" content="在看bootstrap的轮播插件源码的时候发现一种新的自调函数的写法（其实应该不新了），开头的一段就卡住了，原谅我是个菜鸟，就顺便记录一下。stackoverflow上有大神们的回答在这里，轮播的函数形式如下： !function ($) { //code here
+}(window.jQuery &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sparkmorry.github.ioblog/categories/mac">
+  <link rel="canonical" href="http://sparkmorry.github.io/blog/2014/02/05/self-invoking-function-in-javascript">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Morry's Blog" type="application/atom+xml">
@@ -68,35 +69,117 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Mac</h1>
+    
+      <h1 class="entry-title">Self-invoking Function in Javascript</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-05T23:31:52+08:00" pubdate data-updated="true">Feb 5<span>th</span>, 2014</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>在看bootstrap的轮播插件源码的时候发现一种新的自调函数的写法（其实应该不新了），开头的一段就卡住了，原谅我是个菜鸟，就顺便记录一下。stackoverflow上有大神们的回答在这里，轮播的函数形式如下：</p>
 
-  
-  <h2>2013</h2>
+<pre><code>!function ($) {
+   //code here
+}(window.jQuery);
+</code></pre>
 
-<article>
-  
-<h1><a href="/blog/2013/12/30/zai-machuan-jing-xia-pao-hui-bian/">在Mac环境下跑汇编</a></h1>
-<time datetime="2013-12-30T23:12:34+08:00" pubdate><span class='month'>Dec</span> <span class='day'>30</span> <span class='year'>2013</span></time>
+<p>通常自调函数来模仿块级作用域的方式是：</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/mac/'>Mac</a>, <a class='category' href='/blog/categories/assembly/'>assembly</a></span>
-</footer>
+<pre><code>(function(parameters){
+     //这里是块级作用域
+})();
+</code></pre>
 
+<p>在function外面的这对括号使里面的匿名函数变成了函数表达式，并在之后马上调用。这个相当于：</p>
 
-</article>
+<pre><code>var Name=function(parameters){
+   //这里是块级作用域
+}; 
+Name();  //调用匿名函数
+</code></pre>
 
+<p>函数表达式是在运行中以引用的方式赋值给一个变量的，如上面的函数创建的方式。而这里函数表达式和函数声明是不一样的，函数声明的通常形式如下：</p>
+
+<pre><code>function Name(parameters){
+    //code here
+}
+</code></pre>
+
+<p>函数声明会在程序刚开始运行的时候会被提升（所以可以在执行之后声明），但是并不执行，直到被调用的时候再执行。</p>
+
+<p>所以与括号作用相同的function前面的感叹号，因为括号的优先级高于感叹号，感叹号使得后面的一整串内容变成了一个bool表达式，编译器就会直接运行这个表达式了。这个表达式是个匿名函数，传入了一个参数，这里命名成$，其实无所谓是什么，只是一个形参，并在自调的时候把jQuery对象传进去，这里的jQuery对象是个全局变量，所以是windows.jQuery</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Mengli Xia</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-05T23:31:52+08:00" pubdate data-updated="true">Feb 5<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/javascript/'>javascript</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sparkmorry.github.io/blog/2014/02/05/self-invoking-function-in-javascript/" data-via="" data-counturl="http://sparkmorry.github.io/blog/2014/02/05/self-invoking-function-in-javascript/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/01/29/cardinalyang-tiao-qu-xian-de-javascriptshi-xian-dai-ma-pian/" title="Previous Post: Cardinal样条曲线的Javascript实现(代码篇)">&laquo; Cardinal样条曲线的Javascript实现(代码篇)</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/02/12/octopress-journey/" title="Next Post: Octopress Journey">Octopress Journey &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
 
 </div>
