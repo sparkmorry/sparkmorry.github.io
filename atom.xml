@@ -4,7 +4,7 @@
   <title><![CDATA[Morry's Blog]]></title>
   <link href="http://sparkmorry.github.io/atom.xml" rel="self"/>
   <link href="http://sparkmorry.github.io/"/>
-  <updated>2014-02-13T00:33:18+08:00</updated>
+  <updated>2014-02-13T10:31:50+08:00</updated>
   <id>http://sparkmorry.github.io/</id>
   <author>
     <name><![CDATA[Mengli Xia]]></name>
@@ -113,10 +113,11 @@ rake deploy
 </br>
 <img src="http://sparkmorry.github.io/images/posts/Cardinal/hermite4.png" style="width:200px;"></img></br></p>
 
-<p>如Pk=P(0)=[0 0 0 1]*[a b c d]&lsquo;，这里每一个曲线段上的点都被参数化到0～1之间，所以起始点就是P(0),终止点就是P(1)，利用线代方法（参考线性方程求解）通过4个参数对多项式系数求解</p>
+<p>如Pk=P(0)=[0 0 0 1]*[a b c d]&lsquo;，这里每一个曲线段上的点都被参数化到0～1之间，所以起始点就是P(0),终止点就是P(1)，利用线代方法（参考线性方程求解）通过4个参数对多项式系数求解</br>
+<img src="http://sparkmorry.github.io/images/posts/Cardinal/hermite5.png" style="width:150px;"></img></br></p>
 
 <p>最后边界条件的表达式如下</br>
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/Hermite1.png" style="width:150px;"></img></br></p>
+<img src="http://sparkmorry.github.io/images/posts/Cardinal/hermite6.png" style="width:150px;"></img></br></p>
 
 <p>其中M*P部分就是通过对Hermite函数推导得到的系数矩阵[a b c d]&lsquo;，Pk和Pk+1由用户给定，DPk和DPk+1由给定D值计算获得，根据不同的控制方式可以生成有不同曲线，Cardinal曲线就是Hermite曲线的一种变形，通过对切线斜率进行控制来控制曲线的平滑度。</p>
 
