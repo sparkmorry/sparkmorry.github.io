@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Computer Vision | Morry's Blog]]></title>
+  <link href="http://sparkmorry.github.io/blog/categories/computer-vision/atom.xml" rel="self"/>
+  <link href="http://sparkmorry.github.io/"/>
+  <updated>2014-02-13T13:17:11+08:00</updated>
+  <id>http://sparkmorry.github.io/</id>
+  <author>
+    <name><![CDATA[Mengli Xia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Install Opencv on Mac]]></title>
+    <link href="http://sparkmorry.github.io/blog/2013/12/10/install-opencv-on-mac/"/>
+    <updated>2013-12-10T00:15:32+08:00</updated>
+    <id>http://sparkmorry.github.io/blog/2013/12/10/install-opencv-on-mac</id>
+    <content type="html"><![CDATA[<p>下载好opencv之后</p>
+
+<ol>
+<li><p>在文件夹下新建一个release或build的文件夹；</p></li>
+<li><p>cmake .</p></li>
+</ol>
+
+
+<p>　make</p>
+
+<p>Python中运行：</p>
+
+<p>在该build文件夹下</p>
+
+<p>nano .bash_profile</p>
+
+<p>把python的路径加下去</p>
+
+<p>export PYTHONPATH=/usr/local/lib/python2.7/site-packages/:$PYTHONPATH</p>
+
+<p>Xcode中运行，可能碰到的一些问题：</p>
+
+<ul>
+<li>usr/local/include和usr/local/lib的问题就不说了，编译之前要把头文件和动态库都连进去否则会产生dyld: Library not loaded的错误</li>
+<li>dyld: Library not loaded: cv2.so，有放到cv2.so檔案的, 則是要記得到Build Phases（project target下）內，把選項改為optional</li>
+<li>Undefined symbols for architecture x86_64:
+C++库和opencv库编译不一致，将XCode的C++ Standard Library改为GNU C++ standard library即可正常编译显示图片。Project Build settings &ndash;> APPLE LLVM compiler 4.2 &ndash; Language &ndash;> C++ Standard Library</li>
+</ul>
+
+
+<p>在这里赞一下这个<a href="http://wiki.opencv.org.cn/index.php/%E9%A6%96%E9%A1%B5">网站</a>，里面有很多例程参考，每个都有不同语言的版本</p>
+]]></content>
+  </entry>
+  
+</feed>

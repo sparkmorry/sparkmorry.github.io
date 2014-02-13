@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Javascript | Morry's Blog]]></title>
   <link href="http://sparkmorry.github.io/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://sparkmorry.github.io/"/>
-  <updated>2014-02-13T13:01:07+08:00</updated>
+  <updated>2014-02-13T13:17:11+08:00</updated>
   <id>http://sparkmorry.github.io/</id>
   <author>
     <name><![CDATA[Mengli Xia]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[曲线参数化的Javascript实现（理论篇）]]></title>
+    <title type="html"><![CDATA[曲线参数化的Javascript实现（代码篇）]]></title>
     <link href="http://sparkmorry.github.io/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-%28li-lun-pian-%29/"/>
     <updated>2014-02-06T22:48:03+08:00</updated>
     <id>http://sparkmorry.github.io/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-(li-lun-pian-)</id>

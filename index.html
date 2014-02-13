@@ -9,8 +9,7 @@
   <meta name="author" content="Mengli Xia">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="&nbsp;&nbsp;&nbsp;&nbsp;After one-day searching, I finally set up my own blog by octopress. It looks so amazing and I just fall in love with the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,42 +75,6 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/02/13/qu-xian-can-shu-hua-de-javascriptshi-xian-%28dai-ma-pian-%29/">曲线参数化的Javascript实现（代码篇）</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-13T12:49:25+08:00" pubdate data-updated="true">Feb 13<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/blog/2014/02/12/octopress-journey/">Octopress Journey</a></h1>
     
     
@@ -171,7 +134,7 @@ rake deploy
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-%28li-lun-pian-%29/">曲线参数化的Javascript实现（理论篇）</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-%28li-lun-pian-%29/">曲线参数化的Javascript实现（代码篇）</a></h1>
     
     
       <p class="meta">
@@ -395,6 +358,42 @@ Name();  //调用匿名函数
 <p>函数声明会在程序刚开始运行的时候会被提升（所以可以在执行之后声明），但是并不执行，直到被调用的时候再执行。</p>
 
 <p>所以与括号作用相同的function前面的感叹号，因为括号的优先级高于感叹号，感叹号使得后面的一整串内容变成了一个bool表达式，编译器就会直接运行这个表达式了。这个表达式是个匿名函数，传入了一个参数，这里命名成$，其实无所谓是什么，只是一个形参，并在自调的时候把jQuery对象传进去，这里的jQuery对象是个全局变量，所以是windows.jQuery</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/30/qu-xian-can-shu-hua-de-javascriptshi-xian-%28dai-ma-pian-%29/">曲线参数化的Javascript实现（理论篇）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-30T00:11:25+08:00" pubdate data-updated="true">Jan 30<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
 </div>
   
   
@@ -721,8 +720,83 @@ Name();  //调用匿名函数
 
 <p> ./convert</p></li>
 <li><p>本来想直接运行书里的代码，但是发现书里的代码都是用masm语法编程的，所谓masm就是windows平台下的汇编编译器（对应linux下是nasm），所以在自己的电脑上就坑爹的跑不起来了，但是查到还是可以用一些如DOSbox的工具编译的asm文件然后和c文件连起来的。下了DOSbox，还要配置实在有些麻烦就想着还是明天去实验室做大程的时候顺便写吧，懒得折腾了。</p></li>
+<li><p>生成list文件</p></li>
 </ol>
 
+
+<p>nasm -f elf 6-2.asm -l 6-2.lst</p>
+
+<p>顺带出来的.o里面有一堆机器码，比原来的程序长很多
+.lst文件是.asm文件翻译成机器码的结果就是一对一的翻译</p>
+
+<p>反汇编
+ndisasm 6-2.o</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/10/install-opencv-on-mac/">Install Opencv on Mac</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-10T00:15:32+08:00" pubdate data-updated="true">Dec 10<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>下载好opencv之后</p>
+
+<ol>
+<li><p>在文件夹下新建一个release或build的文件夹；</p></li>
+<li><p>cmake .</p></li>
+</ol>
+
+
+<p>　make</p>
+
+<p>Python中运行：</p>
+
+<p>在该build文件夹下</p>
+
+<p>nano .bash_profile</p>
+
+<p>把python的路径加下去</p>
+
+<p>export PYTHONPATH=/usr/local/lib/python2.7/site-packages/:$PYTHONPATH</p>
+
+<p>Xcode中运行，可能碰到的一些问题：</p>
+
+<ul>
+<li>usr/local/include和usr/local/lib的问题就不说了，编译之前要把头文件和动态库都连进去否则会产生dyld: Library not loaded的错误</li>
+<li>dyld: Library not loaded: cv2.so，有放到cv2.so檔案的, 則是要記得到Build Phases（project target下）內，把選項改為optional</li>
+<li>Undefined symbols for architecture x86_64:
+C++库和opencv库编译不一致，将XCode的C++ Standard Library改为GNU C++ standard library即可正常编译显示图片。Project Build settings &ndash;> APPLE LLVM compiler 4.2 &ndash; Language &ndash;> C++ Standard Library</li>
+</ul>
+
+
+<p>在这里赞一下这个<a href="http://wiki.opencv.org.cn/index.php/%E9%A6%96%E9%A1%B5">网站</a>，里面有很多例程参考，每个都有不同语言的版本</p>
 </div>
   
   
@@ -845,19 +919,19 @@ if __name__ == '__main__':
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/02/13/qu-xian-can-shu-hua-de-javascriptshi-xian-%28dai-ma-pian-%29/">曲线参数化的Javascript实现（代码篇）</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2014/02/12/octopress-journey/">Octopress Journey</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-%28li-lun-pian-%29/">曲线参数化的Javascript实现（理论篇）</a>
+        <a href="/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-%28li-lun-pian-%29/">曲线参数化的Javascript实现（代码篇）</a>
       </li>
     
       <li class="post">
         <a href="/blog/2014/02/05/self-invoking-function-in-javascript/">Self-invoking Function in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/30/qu-xian-can-shu-hua-de-javascriptshi-xian-%28dai-ma-pian-%29/">曲线参数化的Javascript实现（理论篇）</a>
       </li>
     
       <li class="post">

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Assembly | Morry's Blog]]></title>
   <link href="http://sparkmorry.github.io/blog/categories/assembly/atom.xml" rel="self"/>
   <link href="http://sparkmorry.github.io/"/>
-  <updated>2014-02-13T13:01:07+08:00</updated>
+  <updated>2014-02-13T13:17:11+08:00</updated>
   <id>http://sparkmorry.github.io/</id>
   <author>
     <name><![CDATA[Mengli Xia]]></name>
@@ -46,8 +46,17 @@
 
 <p> ./convert</p></li>
 <li><p>本来想直接运行书里的代码，但是发现书里的代码都是用masm语法编程的，所谓masm就是windows平台下的汇编编译器（对应linux下是nasm），所以在自己的电脑上就坑爹的跑不起来了，但是查到还是可以用一些如DOSbox的工具编译的asm文件然后和c文件连起来的。下了DOSbox，还要配置实在有些麻烦就想着还是明天去实验室做大程的时候顺便写吧，懒得折腾了。</p></li>
+<li><p>生成list文件</p></li>
 </ol>
 
+
+<p>nasm -f elf 6-2.asm -l 6-2.lst</p>
+
+<p>顺带出来的.o里面有一堆机器码，比原来的程序长很多
+.lst文件是.asm文件翻译成机器码的结果就是一对一的翻译</p>
+
+<p>反汇编
+ndisasm 6-2.o</p>
 ]]></content>
   </entry>
   

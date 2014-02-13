@@ -123,8 +123,17 @@
 
 <p> ./convert</p></li>
 <li><p>本来想直接运行书里的代码，但是发现书里的代码都是用masm语法编程的，所谓masm就是windows平台下的汇编编译器（对应linux下是nasm），所以在自己的电脑上就坑爹的跑不起来了，但是查到还是可以用一些如DOSbox的工具编译的asm文件然后和c文件连起来的。下了DOSbox，还要配置实在有些麻烦就想着还是明天去实验室做大程的时候顺便写吧，懒得折腾了。</p></li>
+<li><p>生成list文件</p></li>
 </ol>
 
+
+<p>nasm -f elf 6-2.asm -l 6-2.lst</p>
+
+<p>顺带出来的.o里面有一堆机器码，比原来的程序长很多
+.lst文件是.asm文件翻译成机器码的结果就是一对一的翻译</p>
+
+<p>反汇编
+ndisasm 6-2.o</p>
 </div>
 
 
@@ -170,7 +179,7 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/11/12/steganography/" title="Previous Post: Steganography">&laquo; Steganography</a>
+        <a class="basic-alignment left" href="/blog/2013/12/10/install-opencv-on-mac/" title="Previous Post: Install opencv on Mac">&laquo; Install opencv on Mac</a>
       
       
         <a class="basic-alignment right" href="/blog/2014/01/29/cardinalyang-tiao-qu-xian-de-javascriptshi-xian-li-lun-pian/" title="Next Post: Cardinal样条曲线的Javascript实现(理论篇)">Cardinal样条曲线的Javascript实现(理论篇) &raquo;</a>
@@ -188,19 +197,19 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/02/13/qu-xian-can-shu-hua-de-javascriptshi-xian-%28dai-ma-pian-%29/">曲线参数化的Javascript实现（代码篇）</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2014/02/12/octopress-journey/">Octopress Journey</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-%28li-lun-pian-%29/">曲线参数化的Javascript实现（理论篇）</a>
+        <a href="/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-%28li-lun-pian-%29/">曲线参数化的Javascript实现（代码篇）</a>
       </li>
     
       <li class="post">
         <a href="/blog/2014/02/05/self-invoking-function-in-javascript/">Self-invoking Function in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/30/qu-xian-can-shu-hua-de-javascriptshi-xian-%28dai-ma-pian-%29/">曲线参数化的Javascript实现（理论篇）</a>
       </li>
     
       <li class="post">
