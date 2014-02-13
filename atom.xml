@@ -4,7 +4,7 @@
   <title><![CDATA[Morry's Blog]]></title>
   <link href="http://sparkmorry.github.io/atom.xml" rel="self"/>
   <link href="http://sparkmorry.github.io/"/>
-  <updated>2014-02-13T11:43:42+08:00</updated>
+  <updated>2014-02-13T11:52:33+08:00</updated>
   <id>http://sparkmorry.github.io/</id>
   <author>
     <name><![CDATA[Mengli Xia]]></name>
@@ -155,9 +155,7 @@ rake deploy
 </code></pre>
 
 <p>最后的结果截图如下：</br>
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/t1.png" style="width:320px;"></img></br>
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/t2.png" style="width:320px;"></img></br>
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/t3.png" style="width:320px;"></img></br></p>
+<img src="http://sparkmorry.github.io/images/posts/Cardinal/t1.png" style="width:420px;"></img></br></p>
 ]]></content>
   </entry>
   
