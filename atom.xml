@@ -4,7 +4,7 @@
   <title><![CDATA[Morry's Blog]]></title>
   <link href="http://sparkmorry.github.io/atom.xml" rel="self"/>
   <link href="http://sparkmorry.github.io/"/>
-  <updated>2014-02-13T13:17:11+08:00</updated>
+  <updated>2014-02-15T20:05:11+08:00</updated>
   <id>http://sparkmorry.github.io/</id>
   <author>
     <name><![CDATA[Mengli Xia]]></name>
@@ -47,10 +47,10 @@ rake deploy
   
   <entry>
     <title type="html"><![CDATA[曲线参数化的Javascript实现（代码篇）]]></title>
-    <link href="http://sparkmorry.github.io/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-%28li-lun-pian-%29/"/>
+    <link href="http://sparkmorry.github.io/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-%28dai-ma-pian-%29/"/>
     <updated>2014-02-06T22:48:03+08:00</updated>
-    <id>http://sparkmorry.github.io/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-(li-lun-pian-)</id>
-    <content type="html"><![CDATA[<p><a href="http://sparkmorry.github.io/blog/2014/02/13/qu-xian-can-shu-hua-de-javascriptshi-xian-%28li-lun-pian-%29/">在曲线参数化的Javascript实现（理论篇）</a>中推出了曲线弧长积分的公式，以及用二分法通过弧长s来查找样条曲线上对应的u，再求Q(u)的值。弧长积分函数如下：</p>
+    <id>http://sparkmorry.github.io/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-(dai-ma-pian-)</id>
+    <content type="html"><![CDATA[<p><a href="http://sparkmorry.github.io/blog/2014/01/30/qu-xian-can-shu-hua-de-javascriptshi-xian-%28dai-ma-pian-%29/">在曲线参数化的Javascript实现（理论篇）</a>中推出了曲线弧长积分的公式，以及用二分法通过弧长s来查找样条曲线上对应的u，再求Q(u)的值。弧长积分函数如下：</p>
 
 <p><img src="http://sparkmorry.github.io/images/posts/Param/ds.png" style="width:300px;"></img>，其中<img src="http://sparkmorry.github.io/images/posts/Param/ABCDE.png" style="width:200px;"></img>－－－－－公式1</p>
 
@@ -229,9 +229,9 @@ Name();  //调用匿名函数
   
   <entry>
     <title type="html"><![CDATA[曲线参数化的Javascript实现（理论篇）]]></title>
-    <link href="http://sparkmorry.github.io/blog/2014/01/30/qu-xian-can-shu-hua-de-javascriptshi-xian-%28dai-ma-pian-%29/"/>
-    <updated>2014-01-30T00:11:25+08:00</updated>
-    <id>http://sparkmorry.github.io/blog/2014/01/30/qu-xian-can-shu-hua-de-javascriptshi-xian-(dai-ma-pian-)</id>
+    <link href="http://sparkmorry.github.io/blog/2014/01/30/qu-xian-can-shu-hua-de-javascriptshi-xian-%28li-lun-pian-%29/"/>
+    <updated>2014-01-30T22:48:03+08:00</updated>
+    <id>http://sparkmorry.github.io/blog/2014/01/30/qu-xian-can-shu-hua-de-javascriptshi-xian-(li-lun-pian-)</id>
     <content type="html"><![CDATA[
 ]]></content>
   </entry>

@@ -26,9 +26,9 @@
     </url>
     <url>
         <loc>
-            http://sparkmorry.github.io/blog/2014/01/30/qu-xian-can-shu-hua-de-javascriptshi-xian-%28dai-ma-pian-%29/
+            http://sparkmorry.github.io/blog/2014/01/30/qu-xian-can-shu-hua-de-javascriptshi-xian-%28li-lun-pian-%29/
         </loc>
-        <lastmod>2014-02-13T13:16:55+08:00</lastmod>
+        <lastmod>2014-02-13T13:22:13+08:00</lastmod>
     </url>
     <url>
         <loc>
@@ -38,9 +38,9 @@
     </url>
     <url>
         <loc>
-            http://sparkmorry.github.io/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-%28li-lun-pian-%29/
+            http://sparkmorry.github.io/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-%28dai-ma-pian-%29/
         </loc>
-        <lastmod>2014-02-13T13:16:19+08:00</lastmod>
+        <lastmod>2014-02-13T13:21:53+08:00</lastmod>
     </url>
     <url>
         <loc>http://sparkmorry.github.io/blog/2014/02/12/octopress-journey/</loc>
@@ -52,11 +52,11 @@
     </url>
     <url>
         <loc>http://sparkmorry.github.io/blog/archives/</loc>
-        <lastmod>2014-02-13T13:16:55+08:00</lastmod>
+        <lastmod>2014-02-13T13:22:13+08:00</lastmod>
     </url>
     <url>
         <loc>http://sparkmorry.github.io/</loc>
-        <lastmod>2014-02-13T13:16:55+08:00</lastmod>
+        <lastmod>2014-02-13T13:22:13+08:00</lastmod>
     </url>
     <url>
         <loc>http://sparkmorry.github.io/painting/</loc>
@@ -69,9 +69,5 @@
     <url>
         <loc>http://sparkmorry.github.io/robots.txt</loc>
         <lastmod>2014-02-12T15:28:27+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://sparkmorry.github.io/thoughts/</loc>
-        <lastmod>2014-02-12T20:54:15+08:00</lastmod>
     </url>
 </urlset>
