@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Morry's Blog]]></title>
   <link href="http://sparkmorry.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://sparkmorry.github.io/"/>
-  <updated>2014-02-15T20:05:11+08:00</updated>
+  <updated>2014-02-15T21:30:51+08:00</updated>
   <id>http://sparkmorry.github.io/</id>
   <author>
     <name><![CDATA[Mengli Xia]]></name>
@@ -20,7 +20,7 @@
     <id>http://sparkmorry.github.io/blog/2014/02/12/octopress-journey</id>
     <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;After one-day searching, I finally set up my own blog by octopress. It looks so amazing and I just fall in love with the green markdown at the first glance. I will just imigrate the previous blog <a href="http://www.cnblogs.com/sparkmorry/">http://www.cnblogs.com/sparkmorry/</a> @cnblog here.</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;This is just a testing post where I learn how to write an article with markdown and post it under a certain page. According to the documentation of Octopress, to write a new post:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;This is just a testing post where I learn how to write an article with markdown and post it under a certain page. According to the documentation of Octopress, to write a new post and create a new page:</p>
 
 <pre><code>rake new_page[super-awesome]
 # creates /source/super-awesome/index.markdown
@@ -35,13 +35,14 @@ rake new_page[super-awesome/page.html]
 rake watch      # Watches source/ and sass/ for changes and regenerates
 rake preview    # Watches, and mounts a webserver at http://localhost:4000
 rake deploy
+rake gen_deploy #combination
 </code></pre>
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;I have come across a problem of the blog configuration, the source code should be under the root directory for preview, or maybe by changing somewhere else. I am still in my process of learning this new awsome tool.</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;Here in my blog, the posts are relatively under <a href="http://sparkmorry.github.io/">Articles</a> and <a href="http://sparkmorry.github.io/thoughts/">Thoughts</a>. The articles are mainly about the reflections on front-end development or other computer stuffs and the thoughts are just small talks about my daily life. Also, you may see some recent work on drawings or photographies under <a href="http://sparkmorry.github.io/painting/">Gallery</a> as I really like both of them. For more infomation, plz see <a href="http://sparkmorry.github.io/about/">About page</a>. Thanks to github and octopress that I can set up the blog for free.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Here in my blog, the posts are under <a href="http://sparkmorry.github.io/">Articles</a>. The articles are mainly about the reflections on front-end development and my daily life. Also, you may see some recent work on drawings or photographies under <a href="http://sparkmorry.github.io/painting/">Gallery</a> as I really like both of them. For more infomation, plz see <a href="http://sparkmorry.github.io/about/">About page</a>. Thanks to github and octopress that I can set up the blog for free.</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;And I am so pleasure of having your visit on this blog.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; If you have any issues or questions on the code or posts, please contact me. Lastly, I&rsquo;m so pleasant of having your visit on this blog.</p>
 ]]></content>
   </entry>
   
