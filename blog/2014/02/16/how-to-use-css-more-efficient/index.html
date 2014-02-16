@@ -9,7 +9,7 @@
   <meta name="author" content="Mengli Xia">
 
   
-  <meta name="description" content="&nbsp;&nbsp;&nbsp;&nbsp;It all starts from a question on stackoverflow. I have been working on the website weixinfr these days, as we have decided &hellip;">
+  <meta name="description" content="&nbsp;&nbsp;&nbsp;&nbsp;It all starts from a question on stackoverflow. I have been working on the website weixinfr these days, as we haven&rsquo;t &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,7 +94,7 @@
   </header>
 
 
-<div class="entry-content"><p>&nbsp;&nbsp;&nbsp;&nbsp;It all starts from a <a href="http://stackoverflow.com/questions/1875852/define-colors-as-variables-in-css">question</a> on stackoverflow. I have been working on the website <a href="http://www.weixinfr.com/">weixinfr</a> these days, as we have decided the main color style yet, it troubles me repeatedly changing from color to color. For instance, I use red as the color of active link or some titles, and the background color of buttons and some selectors. But what if I want to change the color style to green next time? Should I just find all the &ldquo;red&rdquo;(or #whatever) keyword in the text and determine each fragment if it is the one to change?</p>
+<div class="entry-content"><p>&nbsp;&nbsp;&nbsp;&nbsp;It all starts from a <a href="http://stackoverflow.com/questions/1875852/define-colors-as-variables-in-css">question</a> on stackoverflow. I have been working on the website <a href="http://www.weixinfr.com/">weixinfr</a> these days, as we haven&rsquo;t decided the main color style yet, it troubles me repeatedly changing from color to color. For instance, I use red as the color of active link, some titles, the background color of buttons and some selectors. But what if I want to change the color style to green next time? Should I find all the &ldquo;red&rdquo;(or #whatever) keyword in the text and determine on each fragment if it is the one to change?</p>
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;Color, font, positioning are the main functions of css, I used to define all of them on a certeain box, like:</p>
 
@@ -131,7 +131,7 @@
 
 <p>so everytime I am going to change, I have to check every box to change the color. The idea comes into my mind that how can I use a variable to store the number of the color, and put it somewhere I use it? I know something like <a href="http://lesscss.org/">less</a> makes it possible, but I also want some css solutions. Some anwsers on stackoverflow really inspires me. Colour reference chart, CSS3 variables, sass/scss, grouping the selectors only on color, and setting up a .red class(or alternative color_style).</p>
 
-<p>Actually, I suppose the idea of the last two are the same: alway group up the common style/feature togeter. One of the most exciting things in css is each element can have more than one class. To compare with the 2 solution, we can still find some differences though. By defining a class called &ldquo;red_text&rdquo;, I have to find all the elements in the html file to remove or add the class, and once I want to change the color to green, I have to rename it &ldquo;green_text&rdquo; for the readability(or make it deco_text).</p>
+<p>Actually, I suppose the idea of the last two are the same: always group up the common style/feature togeter. One of the most exciting things in css is each element can have more than one class. To compare with the 2 solutions, we can still find some differences though. By defining a class called &ldquo;red_text&rdquo;, I have to look up all the elements in the html file to remove or add the class, and once I want to change the color to green, I have to rename it &ldquo;green_text&rdquo; for the readability(or make it deco_text).</p>
 
 <pre><code>.deco_text{color:red;}
 </code></pre>
@@ -141,7 +141,7 @@
 <pre><code>#section1, #section2 {color:red;}
 </code></pre>
 
-<p>There is always no the only right answer in my opnion, you should also take the HTML semantics into account. It defers from the authors. CSS is</p>
+<p>There is always no only right answer in my opnion, you should also take the HTML semantics into account. It defers from the authors.</p>
 </div>
 
 
