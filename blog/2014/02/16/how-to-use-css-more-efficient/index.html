@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Octopress Journey - Morry's Blog</title>
+  <title>How to Use Css More Efficient - Morry's Blog</title>
   <meta name="author" content="Mengli Xia">
 
   
-  <meta name="description" content="&nbsp;&nbsp;&nbsp;&nbsp;After one-day searching, I finally set up my own blog by octopress. It looks so amazing and I just fall in love with the &hellip;">
+  <meta name="description" content="&nbsp;&nbsp;&nbsp;&nbsp;It all starts from a question on stackoverflow. I have been working on the website weixinfr these days, as we have decided &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sparkmorry.github.io/blog/2014/02/12/octopress-journey">
+  <link rel="canonical" href="http://sparkmorry.github.io/blog/2014/02/16/how-to-use-css-more-efficient">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Morry's Blog" type="application/atom+xml">
@@ -71,7 +71,7 @@
   
   <header>
     
-      <h1 class="entry-title">Octopress Journey</h1>
+      <h1 class="entry-title">How to Use Css More Efficient</h1>
     
     
       <p class="meta">
@@ -87,38 +87,61 @@
   
 
 
-<time datetime="2014-02-12T16:42:24+08:00" pubdate data-updated="true">Feb 12<span>th</span>, 2014</time>
+<time datetime="2014-02-16T13:00:05+08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>&nbsp;&nbsp;&nbsp;&nbsp;After one-day searching, I finally set up my own blog by octopress. It looks so amazing and I just fall in love with the green markdown at the first glance. I will just imigrate the previous blog <a href="http://www.cnblogs.com/sparkmorry/">http://www.cnblogs.com/sparkmorry/</a> @cnblog here.</p>
+<div class="entry-content"><p>&nbsp;&nbsp;&nbsp;&nbsp;It all starts from a <a href="http://stackoverflow.com/questions/1875852/define-colors-as-variables-in-css">question</a> on stackoverflow. I have been working on the website <a href="http://www.weixinfr.com/">weixinfr</a> these days, as we have decided the main color style yet, it troubles me repeatedly changing from color to color. For instance, I use red as the color of active link or some titles, and the background color of buttons and some selectors. But what if I want to change the color style to green next time? Should I just find all the &ldquo;red&rdquo;(or #whatever) keyword in the text and determine each fragment if it is the one to change?</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;This is just a testing post where I learn how to write an article with markdown and post it under a certain page. According to the documentation of Octopress, to write a new post and create a new page:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Color, font, positioning are the main functions of css, I used to define all of them on a certeain box, like:</p>
 
-<pre><code>rake new_page[super-awesome]
-# creates /source/super-awesome/index.markdown
+<p>for box1:</p>
 
-rake new_page[super-awesome/page.html]
-# creates /source/super-awesome/page.html
+<pre><code>#nav-wrapper{
+    position:fixed;  //positioning
+    height: 60px;
+    z-index: 60;
+    width: 100%;
+    padding: 0;
+    margin:0;
+    text-align: center;   //for text
+    background-color: #fff;    //bg-color
+    color: red;
+    border-bottom: solid 1px #ececec;     //color
+}
 </code></pre>
 
-<p>to publish:</p>
+<p>for box2, repeatedly:</p>
 
-<pre><code>rake generate   # Generates posts and pages into the public directory
-rake watch      # Watches source/ and sass/ for changes and regenerates
-rake preview    # Watches, and mounts a webserver at http://localhost:4000
-rake deploy
-rake gen_deploy #combination
+<pre><code>#login-form{
+    text-align: left;
+    color: white;
+    position: absolute;
+    top: 70px;
+    right: 80px; 
+    z-index: 80;
+    display: block;
+    background-color: rgba(0,0,0,0.4); 
+    padding: 20px 35px;
+}
 </code></pre>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;I have come across a problem of the blog configuration, the source code should be under the root directory for preview, or maybe by changing somewhere else. I am still in my process of learning this new awsome tool.</p>
+<p>so everytime I am going to change, I have to check every box to change the color. The idea comes into my mind that how can I use a variable to store the number of the color, and put it somewhere I use it? I know something like <a href="http://lesscss.org/">less</a> makes it possible, but I also want some css solutions. Some anwsers on stackoverflow really inspires me. Colour reference chart, CSS3 variables, sass/scss, grouping the selectors only on color, and setting up a .red class(or alternative color_style).</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;Here in my blog, the posts are under <a href="http://sparkmorry.github.io/">Articles</a>. The articles are mainly about the reflections on front-end development and my daily life. Also, you may see some recent work on drawings or photographies under <a href="http://sparkmorry.github.io/painting/">Gallery</a> as I really like both of them. For more infomation, plz see <a href="http://sparkmorry.github.io/about/">About page</a>. Thanks to github and octopress that I can set up the blog for free.</p>
+<p>Actually, I suppose the idea of the last two are the same: alway group up the common style/feature togeter. One of the most exciting things in css is each element can have more than one class. To compare with the 2 solution, we can still find some differences though. By defining a class called &ldquo;red_text&rdquo;, I have to find all the elements in the html file to remove or add the class, and once I want to change the color to green, I have to rename it &ldquo;green_text&rdquo; for the readability(or make it deco_text).</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp; If you have any issues or questions on the code or posts, please contact me. Lastly, I&rsquo;m so pleasant of having your visit on this blog.</p>
+<pre><code>.deco_text{color:red;}
+</code></pre>
+
+<p> The alternative one makes it a little better, it only deals with the css file. But the trouble is you need to be careful about the selectors.</p>
+
+<pre><code>#section1, #section2 {color:red;}
+</code></pre>
+
+<p>There is always no the only right answer in my opnion, you should also take the HTML semantics into account. It defers from the authors. CSS is</p>
 </div>
 
 
@@ -141,12 +164,12 @@ rake gen_deploy #combination
   
 
 
-<time datetime="2014-02-12T16:42:24+08:00" pubdate data-updated="true">Feb 12<span>th</span>, 2014</time>
+<time datetime="2014-02-16T13:00:05+08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/essay/'>essay</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>
+    <a class='category' href='/blog/categories/css/'>css</a>
   
 </span>
 
@@ -155,7 +178,7 @@ rake gen_deploy #combination
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sparkmorry.github.io/blog/2014/02/12/octopress-journey/" data-via="" data-counturl="http://sparkmorry.github.io/blog/2014/02/12/octopress-journey/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sparkmorry.github.io/blog/2014/02/16/how-to-use-css-more-efficient/" data-via="" data-counturl="http://sparkmorry.github.io/blog/2014/02/16/how-to-use-css-more-efficient/" >Tweet</a>
   
   
   
@@ -164,10 +187,8 @@ rake gen_deploy #combination
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-%28dai-ma-pian-%29/" title="Previous Post: 曲线参数化的Javascript实现（代码篇）">&laquo; 曲线参数化的Javascript实现（代码篇）</a>
+        <a class="basic-alignment left" href="/blog/2014/02/12/octopress-journey/" title="Previous Post: Octopress Journey">&laquo; Octopress Journey</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/02/16/how-to-use-css-more-efficient/" title="Next Post: How to use css more efficient">How to use css more efficient &raquo;</a>
       
     </p>
   </footer>
