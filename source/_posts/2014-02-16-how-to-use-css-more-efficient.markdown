@@ -1,0 +1,64 @@
+---
+layout: post
+title: "How to use CSS more efficiently"
+date: 2014-02-16 13:00:05 +0800
+comments: true
+categories: css
+---
+&nbsp;&nbsp;&nbsp;&nbsp;It all starts from a [question](http://stackoverflow.com/questions/1875852/define-colors-as-variables-in-css) on stackoverflow. I have been working on the website [weixinfr](http://www.weixinfr.com/) these days, as we haven't decided the main color style yet, it troubles me repeatedly changing from color to color. For instance, I use red as the color of active link, some titles, the background color of buttons and some selectors. But what if I want to change the color style to green next time? Should I find all the "red"(or #whatever) keyword in the text and determine on each fragment if it is the one to change? 
+
+&nbsp;&nbsp;&nbsp;&nbsp;Color, font, positioning are the main functions of css, I used to define all of them on a certeain box, like:
+
+for box1:
+
+	#nav-wrapper{
+		position:fixed;  //positioning
+		height: 60px;
+		z-index: 60;
+		width: 100%;
+		padding: 0;
+		margin:0;
+		text-align: center;   //for text
+		background-color: #fff;    //bg-color
+		color: red;
+		border-bottom: solid 1px #ececec;     //color
+	}
+
+for box2, repeatedly:
+
+	#login-form{
+		text-align: left;
+		color: white;
+		position: absolute;
+		top: 70px;
+		right: 80px; 
+		z-index: 80;
+		display: block;
+		background-color: rgba(0,0,0,0.4); 
+		padding: 20px 35px;
+	}
+
+so everytime I am going to change, I have to check every box to change the color. The idea comes into my mind that how can I use a variable to store the number of the color, and put it somewhere I use it? I know something like [less](http://lesscss.org/) makes it possible, but I also want some css solutions. Some anwsers on stackoverflow really inspires me. Colour reference chart, CSS3 variables, sass/scss, grouping the selectors only on color, and setting up a .red class
+Actually, I suppose the idea of the last two are the same: always group up the common style/feature togeter. One of the most exciting things in css is each element can have more than one class. To compare with the 2 solutions, we can still find some differences though. By defining a class called "red_text", I am forced to guess to which element that class could refer to remove or add the class, and things are already starting to get confusing. And once I want to change the color to green, I have to rename it "green_text" for the readability, and do the find-replace routine to update the whole html file.
+
+	.red{color:red;}
+
+The new problem is mentioned in the book <[CSS Mastery](http://book.douban.com/subject/3887227/)>:
+>It makes sense to name your elements based on what they are rather than how they look. That way your code will have more meaning and never go out of sync with your designs. 
+
+He also gives a pic for the recommanded names as below:</br>
+<img src="/images/posts/css/naming.jpg"/>
+
+ Alternatively, the second one makes it a little better, it only deals with the css file. But the trouble is you need to be careful about the selectors and probably generate a long chaind of ID selectors like:
+ 	
+ 	#section1, #section2, #section3, #section4 {color:red;}
+
+It is caused by the unstructual code like how I used to add classes/ids to nearly everything in an attempt to get fine-grained control over the styles. The debates between Id and Class is also a problem we encountered when styling. With the overreliance on id or class names, we will run out of unique names very quickly and end up creating extremely long and complicated naming conventions.
+A combined solution is given by the author, create a generic class for them all.
+	
+  To conclude, a good choice is to name the elements based on what they are, like popout/highlight, warning, etc, and group up common features in a class, like combine foot_nav, top_nav, aside_nav to nav and use ID to identify something extremely specific. And group up the classes, elements, IDs in common feature into a style instaed of assigning them seperately. 
+  
+  	.popout, h1, .warning {color:red}
+  
+There is no right answer, it all defers from the authors and the circumstances. New techs will lead up a new generation, gives new solutions. Let me end up with the quote of CSS Mastery:
+>Although the goal is to keep your code as lean and mean(ingful) as possible, sometimes you cannot avoid adding an extra nonsemantic div or span to get the page to display the way you want. If this is the case, don’t fret too much over it. We live in a transitional period, and CSS 3 will give us much greater control of our documents. In the meantime, real-world needs often have to come before theory. The trick is knowing when you have to make a compromise and if you are doing it for the right reasons.
