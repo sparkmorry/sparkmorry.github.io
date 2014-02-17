@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>How to Use Css More Efficiently - Morry's Blog</title>
+  <title>How to Use CSS More Efficiently - Morry's Blog</title>
   <meta name="author" content="Mengli Xia">
 
   
@@ -38,7 +38,7 @@
   <header role="banner"><hgroup>
   <h1><a href="/">Morry's Blog</a></h1>
   
-    <h2>A blogging framework for hackers.</h2>
+    <h2>Never stop learning.</h2>
   
 </hgroup>
 
@@ -71,7 +71,7 @@
   
   <header>
     
-      <h1 class="entry-title">How to Use Css More Efficiently</h1>
+      <h1 class="entry-title">How to Use CSS More Efficiently</h1>
     
     
       <p class="meta">
@@ -129,19 +129,35 @@
 }
 </code></pre>
 
-<p>so everytime I am going to change, I have to check every box to change the color. The idea comes into my mind that how can I use a variable to store the number of the color, and put it somewhere I use it? I know something like <a href="http://lesscss.org/">less</a> makes it possible, but I also want some css solutions. Some anwsers on stackoverflow really inspires me. Colour reference chart, CSS3 variables, sass/scss, grouping the selectors only on color, and setting up a .red class(or alternative color_style).</p>
+<p>so everytime I am going to change, I have to check every box to change the color. The idea comes into my mind that how can I use a variable to store the number of the color, and put it somewhere I use it? I know something like <a href="http://lesscss.org/">less</a> makes it possible, but I also want some css solutions. Some anwsers on stackoverflow really inspires me. Colour reference chart, CSS3 variables, sass/scss, grouping the selectors only on color, and setting up a .red class
+Actually, I suppose the idea of the last two are the same: always group up the common style/feature togeter. One of the most exciting things in css is each element can have more than one class. To compare with the 2 solutions, we can still find some differences though. By defining a class called &ldquo;red_text&rdquo;, I am forced to guess to which element that class could refer to remove or add the class, and things are already starting to get confusing. And once I want to change the color to green, I have to rename it &ldquo;green_text&rdquo; for the readability, and do the find-replace routine to update the whole html file.</p>
 
-<p>Actually, I suppose the idea of the last two are the same: always group up the common style/feature togeter. One of the most exciting things in css is each element can have more than one class. To compare with the 2 solutions, we can still find some differences though. By defining a class called &ldquo;red_text&rdquo;, I have to look up all the elements in the html file to remove or add the class, and once I want to change the color to green, I have to rename it &ldquo;green_text&rdquo; for the readability(or make it deco_text).</p>
-
-<pre><code>.deco_text{color:red;}
+<pre><code>.red{color:red;}
 </code></pre>
 
-<p> The alternative one makes it a little better, it only deals with the css file. But the trouble is you need to be careful about the selectors.</p>
+<p>The new problem is mentioned in the book &lt;<a href="http://book.douban.com/subject/3887227/">CSS Mastery</a>>:</p>
 
-<pre><code>#section1, #section2 {color:red;}
+<blockquote><p>It makes sense to name your elements based on what they are rather than how they look. That way your code will have more meaning and never go out of sync with your designs.</p></blockquote>
+
+<p>He also gives a pic for the recommanded names as below:</br>
+<img src="/images/posts/css/naming.jpg"/></p>
+
+<p> Alternatively, the second one makes it a little better, it only deals with the css file. But the trouble is you need to be careful about the selectors and probably generate a long chaind of ID selectors like:</p>
+
+<pre><code>#section1, #section2, #section3, #section4 {color:red;}
 </code></pre>
 
-<p>There is always no only right answer in my opnion, you should also take the HTML semantics into account. It defers from the authors.</p>
+<p>It is caused by the unstructual code like how I used to add classes/ids to nearly everything in an attempt to get fine-grained control over the styles. The debates between Id and Class is also a problem we encountered when styling. With the overreliance on id or class names, we will run out of unique names very quickly and end up creating extremely long and complicated naming conventions.
+A combined solution is given by the author, create a generic class for them all.</p>
+
+<p>  To conclude, a good choice is to name the elements based on what they are, like popout/highlight, warning, etc, and group up common features in a class, like combine foot_nav, top_nav, aside_nav to nav and use ID to identify something extremely specific. And group up the classes, elements, IDs in common feature into a style instaed of assigning them seperately.</p>
+
+<pre><code>.popout, h1, .warning {color:red}
+</code></pre>
+
+<p>There is no right answer, it all defers from the authors and the circumstances. New techs will lead up a new generation, gives new solutions. Let me end up with the quote of CSS Mastery:</p>
+
+<blockquote><p>Although the goal is to keep your code as lean and mean(ingful) as possible, sometimes you cannot avoid adding an extra nonsemantic div or span to get the page to display the way you want. If this is the case, don’t fret too much over it. We live in a transitional period, and CSS 3 will give us much greater control of our documents. In the meantime, real-world needs often have to come before theory. The trick is knowing when you have to make a compromise and if you are doing it for the right reasons.</p></blockquote>
 </div>
 
 
@@ -203,7 +219,7 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/02/16/how-to-use-css-more-efficient/">How to Use Css More Efficiently</a>
+        <a href="/blog/2014/02/16/how-to-use-css-more-efficient/">How to Use CSS More Efficiently</a>
       </li>
     
       <li class="post">
