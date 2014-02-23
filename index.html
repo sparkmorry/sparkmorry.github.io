@@ -9,7 +9,7 @@
   <meta name="author" content="Mengli Xia">
 
   
-  <meta name="description" content="Yes, still cannot help missing him. It&rsquo;s been almost 7 years, since we first met. You sat there still at the back of the room, looking at me. &hellip;">
+  <meta name="description" content="CSS Hacks: Techniques and syntax that achieve desired results by exploiting a bug in a particular browsers rendering engine. CSS Filters: Techniques &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +86,161 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/02/23/css-crossbrowser-compatibility/">CSS Crossbrowser Compatibility</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-23T23:35:51+08:00" pubdate data-updated="true">Feb 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>CSS Hacks:</h3>
+
+<p>Techniques and syntax that achieve desired results by exploiting a bug in a particular browsers rendering engine.</p>
+
+<h3>CSS Filters:</h3>
+
+<p>Techniques and syntax that achieve desired results by exploiting a feature that a particular browsers rendering engine does not yet support.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/21/how-css-visual-formatting-model-works/">How CSS Visual Formatting Model Works</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-21T07:35:45+08:00" pubdate data-updated="true">Feb 21<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It is a common sense that:</p>
+
+<p>the width of a box = width + margin-left + margin-right + padding-left + padding-right + border-left + border-right (rule 1)</p>
+
+<p>based on the box model in CSS. However, there is one more thing to add:</p>
+
+<p>the default width of a block-level element always = the width of its parent element (rule 2)</p>
+
+<p>until a width is set. Setting width makes a structure less flexible, especially when it refers to a px unit. Let&rsquo;s go to a simple example, we have such html code bellow:</p>
+
+<pre><code>&lt;div&gt;
+    &lt;p&gt;blabla&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>with a css style:</p>
+
+<pre><code> div{
+     border: solid 1px black;
+ }
+ p{
+     border: solid 1px black;
+ }
+</code></pre>
+
+<p>As expected, the result shows as following:</p>
+
+<p><img src="/images/posts/css/block.png" alt="block" /></p>
+
+<p>Here we have a clear html structure: <strong>html->div->p</strong>, which are all block-level elements. As initialed, the html element has a 100% width of the window by default, thus, the child element div got the same width as his parent, width:100%, and so does the child p element applied rule 2 above. If the width is set by an author:</p>
+
+<pre><code> div{
+     border: solid 1px black;
+     width:100px; /* the width is set */
+ }
+ p{
+     border: solid 1px black;
+ }
+</code></pre>
+
+<p>The whole visual formatting changed as bellow:</p>
+
+<p><img src="/images/posts/css/divset.png" alt="block" /></p>
+
+<p>However, a width definition of a child element has no effect on its parent, it doesn&rsquo;t have the control:</p>
+
+<pre><code> div{
+     border: solid 1px black;         
+ }
+ p{
+     border: solid 1px black;
+     width:100px; /* the width is set */
+ }
+</code></pre>
+
+<p>Result:</p>
+
+<p><img src="/images/posts/css/pset.png" alt="block" /></p>
+
+<p>You can change the width of the box of the p element by assigning a padding or margin value to it:</p>
+
+<pre><code> div{
+     border: solid 1px black;         
+ }
+ p{
+     border: solid 1px black;
+     width:100px; /* the width is set */
+     padding:100px; /* the padding is set */
+ }
+</code></pre>
+
+<p>By using the power of padding, the redundant div tag could be removed, if your goal is to creating a box like this:</p>
+
+<p><img src="/images/posts/css/padding.png" alt="block" /></p>
+
+<p>The whitespace of the border and the centered form could be made simply by using a padding instead of alot of centering work.</p>
+
+<p>Here, another way of determining the size of an element is called Block Formatting Context(BFC) mentioned in CSS Mastery which is often used for the height collapse problem of the blocks with floated children. Conversely, the mechanism goes the posite way from the nomal formatting, when an element is triggered with the BFC, he is responsible for sizing and positioning itself and its children. It common with the widely known <strong>hasLayout</strong> feature in IE browser.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/02/18/he-is-going-to-princeton/">He Is Going to Princeton</a></h1>
     
     
@@ -115,7 +270,7 @@
 
 <p>The real story began about 5 years ago. It was a hard time with the endless homework for a third-year high school student in China. The only common thing among us could be that we are both boarders, and good at physics in a way. You started to talk with me, asked me questions, glared at me when I was talking to other boy, playing with my pens, looked at me when I was called by the teacher for questions like a real couple, but actually we were not. Those sweet days were kept in my whole life, I thought I was flipped, completely. I swear I loved you more than any boyfriend I have ever dated.</p>
 
-<p>Not all stories get a happy ending. It ends up with my stupid stubbornness and pride. I know it&rsquo;s hard to restart, but I will try. Before that, I still want to improve myself so that to talk to you without my inferiority the next time I see you. As you deserve a better girl.</p>
+<p>Not all stories get a happy ending. It ends up with my stupid stubbornness and pride. I know it&rsquo;s hard to restart, but I will try. Before that, I still want to improve myself so that to talk to you without my inferiority the next time I see you. As you deserve a better girl. Life is long, it&rsquo;s never too late to chatch. Focus on my next 3 years, and hope it sparks!</p>
 
 <p>Congratulations!</p>
 
@@ -824,146 +979,6 @@ Name();  //调用匿名函数
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/12/30/zai-machuan-jing-xia-pao-hui-bian/">在Mac环境下跑汇编</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-30T23:12:34+08:00" pubdate data-updated="true">Dec 30<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天汇编作业做到第七章，就想在Mac下跑自己的asm程序，看到了一个很好的<a href="http://www.raywenderlich.com/37181/ios-assembly-tutorial">教程</a></p>
-
-<p>虽然对自己没有用，但是对汇编又有了一次了解，一些嵌入式设备系统如ios之类的是主要基于arm体系结构的操作系统，而pc机上的大多是基于intel体系结构的操作系统。查到了几种编译汇编代码的方式：</p>
-
-<ol>
-<li><p>用nasm直接编译.asm文件：</p>
-
-<p>  nasm -f macho hello.asm</p>
-
-<p> 生成可执行文件：</p>
-
-<p>  ld -o hello -e mystart hello.o</p>
-
-<p>  运行</p>
-
-<p> ./hello</p>
-
-<p> 检查退出</p>
-
-<p> echo $?</p></li>
-<li><p>用gcc在.c文件中嵌套asm代码：</p>
-
-<p> gcc -Wall -m32 -O3 -fasm-blocks convert.c -o convert</p>
-
-<p> 运行</p>
-
-<p> ./convert</p></li>
-<li><p>本来想直接运行书里的代码，但是发现书里的代码都是用masm语法编程的，所谓masm就是windows平台下的汇编编译器（对应linux下是nasm），所以在自己的电脑上就坑爹的跑不起来了，但是查到还是可以用一些如DOSbox的工具编译的asm文件然后和c文件连起来的。下了DOSbox，还要配置实在有些麻烦就想着还是明天去实验室做大程的时候顺便写吧，懒得折腾了。</p></li>
-<li><p>生成list文件</p></li>
-</ol>
-
-
-<p>nasm -f elf 6-2.asm -l 6-2.lst</p>
-
-<p>顺带出来的.o里面有一堆机器码，比原来的程序长很多
-.lst文件是.asm文件翻译成机器码的结果就是一对一的翻译</p>
-
-<p>反汇编
-ndisasm 6-2.o</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/12/10/install-opencv-on-mac/">Install Opencv on Mac</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-10T00:15:32+08:00" pubdate data-updated="true">Dec 10<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>下载好opencv之后</p>
-
-<ol>
-<li><p>在文件夹下新建一个release或build的文件夹；</p></li>
-<li><p>cmake .</p></li>
-</ol>
-
-
-<p>　make</p>
-
-<p>Python中运行：</p>
-
-<p>在该build文件夹下</p>
-
-<p>nano .bash_profile</p>
-
-<p>把python的路径加下去</p>
-
-<p>export PYTHONPATH=/usr/local/lib/python2.7/site-packages/:$PYTHONPATH</p>
-
-<p>Xcode中运行，可能碰到的一些问题：</p>
-
-<ul>
-<li>usr/local/include和usr/local/lib的问题就不说了，编译之前要把头文件和动态库都连进去否则会产生dyld: Library not loaded的错误</li>
-<li>dyld: Library not loaded: cv2.so，有放到cv2.so檔案的, 則是要記得到Build Phases（project target下）內，把選項改為optional</li>
-<li>Undefined symbols for architecture x86_64:
-C++库和opencv库编译不一致，将XCode的C++ Standard Library改为GNU C++ standard library即可正常编译显示图片。Project Build settings &ndash;> APPLE LLVM compiler 4.2 &ndash; Language &ndash;> C++ Standard Library</li>
-</ul>
-
-
-<p>在这里赞一下这个<a href="http://wiki.opencv.org.cn/index.php/%E9%A6%96%E9%A1%B5">网站</a>，里面有很多例程参考，每个都有不同语言的版本</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -983,6 +998,14 @@ C++库和opencv库编译不一致，将XCode的C++ Standard Library改为GNU C++
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/02/23/css-crossbrowser-compatibility/">CSS Crossbrowser Compatibility</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/21/how-css-visual-formatting-model-works/">How CSS Visual Formatting Model Works</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/18/he-is-going-to-princeton/">He Is Going to Princeton</a>
       </li>
     
@@ -994,20 +1017,12 @@ C++库和opencv库编译不一致，将XCode的C++ Standard Library改为GNU C++
         <a href="/blog/2014/02/12/octopress-journey/">Octopress Journey</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-%28dai-ma-pian-%29/">曲线参数化的Javascript实现（代码篇）</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/05/self-invoking-function-in-javascript/">Self-invoking Function in Javascript</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
 <h1>Category</h1>
-<span class='categories_tag'> <a href='/blog/categories/assembly' style='font-size: 112.0%'>Assembly(1)</a>  <a href='/blog/categories/computer-graph' style='font-size: 148.0%'>Computer graph(4)</a>  <a href='/blog/categories/computer-vision' style='font-size: 112.0%'>Computer vision(1)</a>  <a href='/blog/categories/css' style='font-size: 112.0%'>Css(1)</a>  <a href='/blog/categories/image-processing' style='font-size: 112.0%'>Image processing(1)</a>  <a href='/blog/categories/javascript' style='font-size: 160.0%'>Javascript(5)</a>  <a href='/blog/categories/life' style='font-size: 112.0%'>Life(1)</a>  <a href='/blog/categories/mac' style='font-size: 124.0%'>Mac(2)</a>  <a href='/blog/categories/octopress' style='font-size: 112.0%'>Octopress(1)</a>  <a href='/blog/categories/opencv' style='font-size: 112.0%'>Opencv(1)</a>  <a href='/blog/categories/pil' style='font-size: 112.0%'>Pil(1)</a>  <a href='/blog/categories/python' style='font-size: 112.0%'>Python(1)</a>  <a href='/blog/categories/thoughts' style='font-size: 124.0%'>Thoughts(2)</a> </span>
+<span class='categories_tag'> <a href='/blog/categories/assembly' style='font-size: 112.0%'>Assembly(1)</a>  <a href='/blog/categories/computer-graph' style='font-size: 148.0%'>Computer graph(4)</a>  <a href='/blog/categories/computer-vision' style='font-size: 112.0%'>Computer vision(1)</a>  <a href='/blog/categories/css' style='font-size: 112.0%'>Css(1)</a>  <a href='/blog/categories/css' style='font-size: 112.0%'>Css(1)</a>  <a href='/blog/categories/css' style='font-size: 112.0%'>Css(1)</a>  <a href='/blog/categories/image-processing' style='font-size: 112.0%'>Image processing(1)</a>  <a href='/blog/categories/javascript' style='font-size: 160.0%'>Javascript(5)</a>  <a href='/blog/categories/life' style='font-size: 112.0%'>Life(1)</a>  <a href='/blog/categories/mac' style='font-size: 124.0%'>Mac(2)</a>  <a href='/blog/categories/octopress' style='font-size: 112.0%'>Octopress(1)</a>  <a href='/blog/categories/opencv' style='font-size: 112.0%'>Opencv(1)</a>  <a href='/blog/categories/pil' style='font-size: 112.0%'>Pil(1)</a>  <a href='/blog/categories/python' style='font-size: 112.0%'>Python(1)</a>  <a href='/blog/categories/thoughts' style='font-size: 124.0%'>Thoughts(2)</a> </span>
 </section>
 
 

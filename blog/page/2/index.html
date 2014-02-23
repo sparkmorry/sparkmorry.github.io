@@ -9,7 +9,7 @@
   <meta name="author" content="Mengli Xia">
 
   
-  <meta name="description" content="今天做DAM的作业，做到图片水印的时候，想起来当初小调同学把言页之庭的种子通过图片发给我。看到下面这个新闻真是觉得碉堡了！！ 下面分享一下自己用python实现的隐写术，后面如果有时间会再更深入研究一下解码的问题！！ 基本思路是： 1.每张图片都有RGB三个通道，每个像素点的值为3个8位的R/G/ &hellip;">
+  <meta name="description" content="今天汇编作业做到第七章，就想在Mac下跑自己的asm程序，看到了一个很好的教程 虽然对自己没有用，但是对汇编又有了一次了解，一些嵌入式设备系统如ios之类的是主要基于arm体系结构的操作系统，而pc机上的大多是基于intel体系结构的操作系统。查到了几种编译汇编代码的方式： 用nasm直接编译. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,146 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/30/zai-machuan-jing-xia-pao-hui-bian/">在Mac环境下跑汇编</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-30T23:12:34+08:00" pubdate data-updated="true">Dec 30<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天汇编作业做到第七章，就想在Mac下跑自己的asm程序，看到了一个很好的<a href="http://www.raywenderlich.com/37181/ios-assembly-tutorial">教程</a></p>
+
+<p>虽然对自己没有用，但是对汇编又有了一次了解，一些嵌入式设备系统如ios之类的是主要基于arm体系结构的操作系统，而pc机上的大多是基于intel体系结构的操作系统。查到了几种编译汇编代码的方式：</p>
+
+<ol>
+<li><p>用nasm直接编译.asm文件：</p>
+
+<p>  nasm -f macho hello.asm</p>
+
+<p> 生成可执行文件：</p>
+
+<p>  ld -o hello -e mystart hello.o</p>
+
+<p>  运行</p>
+
+<p> ./hello</p>
+
+<p> 检查退出</p>
+
+<p> echo $?</p></li>
+<li><p>用gcc在.c文件中嵌套asm代码：</p>
+
+<p> gcc -Wall -m32 -O3 -fasm-blocks convert.c -o convert</p>
+
+<p> 运行</p>
+
+<p> ./convert</p></li>
+<li><p>本来想直接运行书里的代码，但是发现书里的代码都是用masm语法编程的，所谓masm就是windows平台下的汇编编译器（对应linux下是nasm），所以在自己的电脑上就坑爹的跑不起来了，但是查到还是可以用一些如DOSbox的工具编译的asm文件然后和c文件连起来的。下了DOSbox，还要配置实在有些麻烦就想着还是明天去实验室做大程的时候顺便写吧，懒得折腾了。</p></li>
+<li><p>生成list文件</p></li>
+</ol>
+
+
+<p>nasm -f elf 6-2.asm -l 6-2.lst</p>
+
+<p>顺带出来的.o里面有一堆机器码，比原来的程序长很多
+.lst文件是.asm文件翻译成机器码的结果就是一对一的翻译</p>
+
+<p>反汇编
+ndisasm 6-2.o</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/10/install-opencv-on-mac/">Install Opencv on Mac</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-10T00:15:32+08:00" pubdate data-updated="true">Dec 10<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>下载好opencv之后</p>
+
+<ol>
+<li><p>在文件夹下新建一个release或build的文件夹；</p></li>
+<li><p>cmake .</p></li>
+</ol>
+
+
+<p>　make</p>
+
+<p>Python中运行：</p>
+
+<p>在该build文件夹下</p>
+
+<p>nano .bash_profile</p>
+
+<p>把python的路径加下去</p>
+
+<p>export PYTHONPATH=/usr/local/lib/python2.7/site-packages/:$PYTHONPATH</p>
+
+<p>Xcode中运行，可能碰到的一些问题：</p>
+
+<ul>
+<li>usr/local/include和usr/local/lib的问题就不说了，编译之前要把头文件和动态库都连进去否则会产生dyld: Library not loaded的错误</li>
+<li>dyld: Library not loaded: cv2.so，有放到cv2.so檔案的, 則是要記得到Build Phases（project target下）內，把選項改為optional</li>
+<li>Undefined symbols for architecture x86_64:
+C++库和opencv库编译不一致，将XCode的C++ Standard Library改为GNU C++ standard library即可正常编译显示图片。Project Build settings &ndash;> APPLE LLVM compiler 4.2 &ndash; Language &ndash;> C++ Standard Library</li>
+</ul>
+
+
+<p>在这里赞一下这个<a href="http://wiki.opencv.org.cn/index.php/%E9%A6%96%E9%A1%B5">网站</a>，里面有很多例程参考，每个都有不同语言的版本</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -202,6 +342,14 @@ if __name__ == '__main__':
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/02/23/css-crossbrowser-compatibility/">CSS Crossbrowser Compatibility</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/21/how-css-visual-formatting-model-works/">How CSS Visual Formatting Model Works</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/18/he-is-going-to-princeton/">He Is Going to Princeton</a>
       </li>
     
@@ -213,20 +361,12 @@ if __name__ == '__main__':
         <a href="/blog/2014/02/12/octopress-journey/">Octopress Journey</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-%28dai-ma-pian-%29/">曲线参数化的Javascript实现（代码篇）</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/05/self-invoking-function-in-javascript/">Self-invoking Function in Javascript</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
 <h1>Category</h1>
-<span class='categories_tag'> <a href='/blog/categories/assembly' style='font-size: 112.0%'>Assembly(1)</a>  <a href='/blog/categories/computer-graph' style='font-size: 148.0%'>Computer graph(4)</a>  <a href='/blog/categories/computer-vision' style='font-size: 112.0%'>Computer vision(1)</a>  <a href='/blog/categories/css' style='font-size: 112.0%'>Css(1)</a>  <a href='/blog/categories/image-processing' style='font-size: 112.0%'>Image processing(1)</a>  <a href='/blog/categories/javascript' style='font-size: 160.0%'>Javascript(5)</a>  <a href='/blog/categories/life' style='font-size: 112.0%'>Life(1)</a>  <a href='/blog/categories/mac' style='font-size: 124.0%'>Mac(2)</a>  <a href='/blog/categories/octopress' style='font-size: 112.0%'>Octopress(1)</a>  <a href='/blog/categories/opencv' style='font-size: 112.0%'>Opencv(1)</a>  <a href='/blog/categories/pil' style='font-size: 112.0%'>Pil(1)</a>  <a href='/blog/categories/python' style='font-size: 112.0%'>Python(1)</a>  <a href='/blog/categories/thoughts' style='font-size: 124.0%'>Thoughts(2)</a> </span>
+<span class='categories_tag'> <a href='/blog/categories/assembly' style='font-size: 112.0%'>Assembly(1)</a>  <a href='/blog/categories/computer-graph' style='font-size: 148.0%'>Computer graph(4)</a>  <a href='/blog/categories/computer-vision' style='font-size: 112.0%'>Computer vision(1)</a>  <a href='/blog/categories/css' style='font-size: 112.0%'>Css(1)</a>  <a href='/blog/categories/css' style='font-size: 112.0%'>Css(1)</a>  <a href='/blog/categories/css' style='font-size: 112.0%'>Css(1)</a>  <a href='/blog/categories/image-processing' style='font-size: 112.0%'>Image processing(1)</a>  <a href='/blog/categories/javascript' style='font-size: 160.0%'>Javascript(5)</a>  <a href='/blog/categories/life' style='font-size: 112.0%'>Life(1)</a>  <a href='/blog/categories/mac' style='font-size: 124.0%'>Mac(2)</a>  <a href='/blog/categories/octopress' style='font-size: 112.0%'>Octopress(1)</a>  <a href='/blog/categories/opencv' style='font-size: 112.0%'>Opencv(1)</a>  <a href='/blog/categories/pil' style='font-size: 112.0%'>Pil(1)</a>  <a href='/blog/categories/python' style='font-size: 112.0%'>Python(1)</a>  <a href='/blog/categories/thoughts' style='font-size: 124.0%'>Thoughts(2)</a> </span>
 </section>
 
 

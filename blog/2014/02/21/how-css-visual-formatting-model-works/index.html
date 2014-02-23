@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Self-invoking Function in Javascript - Morry's Blog</title>
+  <title>How CSS Visual Formatting Model Works - Morry's Blog</title>
   <meta name="author" content="Mengli Xia">
 
   
-  <meta name="description" content="在看bootstrap的轮播插件源码的时候发现一种新的自调函数的写法（其实应该不新了），开头的一段就卡住了，原谅我是个菜鸟，就顺便记录一下。stackoverflow上有大神们的回答在这里，轮播的函数形式如下： !function ($) { //code here
-}(window.jQuery &hellip;">
+  <meta name="description" content="It is a common sense that: the width of a box = width + margin-left + margin-right + padding-left + padding-right + border-left + border-right (rule &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sparkmorry.github.io/blog/2014/02/05/self-invoking-function-in-javascript">
+  <link rel="canonical" href="http://sparkmorry.github.io/blog/2014/02/21/how-css-visual-formatting-model-works">
   <link href="/icon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Morry's Blog" type="application/atom+xml">
@@ -84,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">Self-invoking Function in Javascript</h1>
+      <h1 class="entry-title">How CSS Visual Formatting Model Works</h1>
     
     
       <p class="meta">
@@ -100,45 +99,91 @@
   
 
 
-<time datetime="2014-02-05T23:31:52+08:00" pubdate data-updated="true">Feb 5<span>th</span>, 2014</time>
+<time datetime="2014-02-21T07:35:45+08:00" pubdate data-updated="true">Feb 21<span>st</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>在看bootstrap的轮播插件源码的时候发现一种新的自调函数的写法（其实应该不新了），开头的一段就卡住了，原谅我是个菜鸟，就顺便记录一下。stackoverflow上有大神们的回答在这里，轮播的函数形式如下：</p>
+<div class="entry-content"><p>It is a common sense that:</p>
 
-<pre><code>!function ($) {
-   //code here
-}(window.jQuery);
+<p>the width of a box = width + margin-left + margin-right + padding-left + padding-right + border-left + border-right (rule 1)</p>
+
+<p>based on the box model in CSS. However, there is one more thing to add:</p>
+
+<p>the default width of a block-level element always = the width of its parent element (rule 2)</p>
+
+<p>until a width is set. Setting width makes a structure less flexible, especially when it refers to a px unit. Let&rsquo;s go to a simple example, we have such html code bellow:</p>
+
+<pre><code>&lt;div&gt;
+    &lt;p&gt;blabla&lt;/p&gt;
+&lt;/div&gt;
 </code></pre>
 
-<p>通常自调函数来模仿块级作用域的方式是：</p>
+<p>with a css style:</p>
 
-<pre><code>(function(parameters){
-     //这里是块级作用域
-})();
+<pre><code> div{
+     border: solid 1px black;
+ }
+ p{
+     border: solid 1px black;
+ }
 </code></pre>
 
-<p>在function外面的这对括号使里面的匿名函数变成了函数表达式，并在之后马上调用。这个相当于：</p>
+<p>As expected, the result shows as following:</p>
 
-<pre><code>var Name=function(parameters){
-   //这里是块级作用域
-}; 
-Name();  //调用匿名函数
+<p><img src="/images/posts/css/block.png" alt="block" /></p>
+
+<p>Here we have a clear html structure: <strong>html->div->p</strong>, which are all block-level elements. As initialed, the html element has a 100% width of the window by default, thus, the child element div got the same width as his parent, width:100%, and so does the child p element applied rule 2 above. If the width is set by an author:</p>
+
+<pre><code> div{
+     border: solid 1px black;
+     width:100px; /* the width is set */
+ }
+ p{
+     border: solid 1px black;
+ }
 </code></pre>
 
-<p>函数表达式是在运行中以引用的方式赋值给一个变量的，如上面的函数创建的方式。而这里函数表达式和函数声明是不一样的，函数声明的通常形式如下：</p>
+<p>The whole visual formatting changed as bellow:</p>
 
-<pre><code>function Name(parameters){
-    //code here
-}
+<p><img src="/images/posts/css/divset.png" alt="block" /></p>
+
+<p>However, a width definition of a child element has no effect on its parent, it doesn&rsquo;t have the control:</p>
+
+<pre><code> div{
+     border: solid 1px black;         
+ }
+ p{
+     border: solid 1px black;
+     width:100px; /* the width is set */
+ }
 </code></pre>
 
-<p>函数声明会在程序刚开始运行的时候会被提升（所以可以在执行之后声明），但是并不执行，直到被调用的时候再执行。</p>
+<p>Result:</p>
 
-<p>所以与括号作用相同的function前面的感叹号，因为括号的优先级高于感叹号，感叹号使得后面的一整串内容变成了一个bool表达式，编译器就会直接运行这个表达式了。这个表达式是个匿名函数，传入了一个参数，这里命名成$，其实无所谓是什么，只是一个形参，并在自调的时候把jQuery对象传进去，这里的jQuery对象是个全局变量，所以是windows.jQuery</p>
+<p><img src="/images/posts/css/pset.png" alt="block" /></p>
+
+<p>You can change the width of the box of the p element by assigning a padding or margin value to it:</p>
+
+<pre><code> div{
+     border: solid 1px black;         
+ }
+ p{
+     border: solid 1px black;
+     width:100px; /* the width is set */
+     padding:100px; /* the padding is set */
+ }
+</code></pre>
+
+<p>By using the power of padding, the redundant div tag could be removed, if your goal is to creating a box like this:</p>
+
+<p><img src="/images/posts/css/padding.png" alt="block" /></p>
+
+<p>The whitespace of the border and the centered form could be made simply by using a padding instead of alot of centering work.</p>
+
+<p>Here, another way of determining the size of an element is called Block Formatting Context(BFC) mentioned in CSS Mastery which is often used for the height collapse problem of the blocks with floated children. Conversely, the mechanism goes the posite way from the nomal formatting, when an element is triggered with the BFC, he is responsible for sizing and positioning itself and its children. It common with the widely known <strong>hasLayout</strong> feature in IE browser.</p>
 </div>
 
 
@@ -161,12 +206,12 @@ Name();  //调用匿名函数
   
 
 
-<time datetime="2014-02-05T23:31:52+08:00" pubdate data-updated="true">Feb 5<span>th</span>, 2014</time>
+<time datetime="2014-02-21T07:35:45+08:00" pubdate data-updated="true">Feb 21<span>st</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/javascript/'>javascript</a>
+    <a class='category' href='/blog/categories/css/'>CSS</a>
   
 </span>
 
@@ -175,7 +220,7 @@ Name();  //调用匿名函数
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sparkmorry.github.io/blog/2014/02/05/self-invoking-function-in-javascript/" data-via="" data-counturl="http://sparkmorry.github.io/blog/2014/02/05/self-invoking-function-in-javascript/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sparkmorry.github.io/blog/2014/02/21/how-css-visual-formatting-model-works/" data-via="" data-counturl="http://sparkmorry.github.io/blog/2014/02/21/how-css-visual-formatting-model-works/" >Tweet</a>
   
   
   
@@ -184,10 +229,10 @@ Name();  //调用匿名函数
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/01/30/qu-xian-can-shu-hua-de-javascriptshi-xian-%28li-lun-pian-%29/" title="Previous Post: 曲线参数化的Javascript实现（理论篇）">&laquo; 曲线参数化的Javascript实现（理论篇）</a>
+        <a class="basic-alignment left" href="/blog/2014/02/18/he-is-going-to-princeton/" title="Previous Post: He is going to Princeton">&laquo; He is going to Princeton</a>
       
       
-        <a class="basic-alignment right" href="/blog/2014/02/06/qu-xian-can-shu-hua-de-javascriptshi-xian-%28dai-ma-pian-%29/" title="Next Post: 曲线参数化的Javascript实现（代码篇）">曲线参数化的Javascript实现（代码篇） &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2014/02/23/css-crossbrowser-compatibility/" title="Next Post: CSS Crossbrowser compatibility">CSS Crossbrowser compatibility &raquo;</a>
       
     </p>
   </footer>
@@ -263,8 +308,8 @@ Name();  //调用匿名函数
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sparkmorry.github.io/blog/2014/02/05/self-invoking-function-in-javascript/';
-        var disqus_url = 'http://sparkmorry.github.io/blog/2014/02/05/self-invoking-function-in-javascript/';
+        var disqus_identifier = 'http://sparkmorry.github.io/blog/2014/02/21/how-css-visual-formatting-model-works/';
+        var disqus_url = 'http://sparkmorry.github.io/blog/2014/02/21/how-css-visual-formatting-model-works/';
         var disqus_script = 'embed.js';
       
     (function () {
