@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Css | Morry's Blog]]></title>
+  <title><![CDATA[Category: CSS | Morry's Blog]]></title>
   <link href="http://sparkmorry.github.io/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://sparkmorry.github.io/"/>
-  <updated>2014-02-24T00:43:56+08:00</updated>
+  <updated>2014-02-24T11:21:02+08:00</updated>
   <id>http://sparkmorry.github.io/</id>
   <author>
     <name><![CDATA[Mengli Xia]]></name>
@@ -25,6 +25,224 @@
 <h3>CSS Filters:</h3>
 
 <p>Techniques and syntax that achieve desired results by exploiting a feature that a particular browsers rendering engine does not yet support.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How CSS Visual Formatting Model Works]]></title>
+    <link href="http://sparkmorry.github.io/blog/2014/02/21/how-css-visual-formatting-model-works/"/>
+    <updated>2014-02-21T07:35:45+08:00</updated>
+    <id>http://sparkmorry.github.io/blog/2014/02/21/how-css-visual-formatting-model-works</id>
+    <content type="html"><![CDATA[<p>It is a common sense that:</p>
+
+<p>the width of a box = width + margin-left + margin-right + padding-left + padding-right + border-left + border-right (rule 1)</p>
+
+<p>based on the box model in CSS. However, there is one more thing to add:</p>
+
+<p>the default width of a block-level element always = the width of its parent element (rule 2)</p>
+
+<p>until a width is set. Setting width makes a structure less flexible, especially when it refers to a px unit. Let&rsquo;s go to a simple example, we have such html code bellow:</p>
+
+<pre><code>&lt;div&gt;
+    &lt;p&gt;blabla&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>with a css style:</p>
+
+<pre><code> div{
+     border: solid 1px black;
+ }
+ p{
+     border: solid 1px black;
+ }
+</code></pre>
+
+<p>As expected, the result shows as following:</p>
+
+<p><img src="/images/posts/css/block.png" alt="block" /></p>
+
+<p>Here we have a clear html structure: <strong>html->div->p</strong>, which are all block-level elements. As initialed, the html element has a 100% width of the window by default, thus, the child element div got the same width as his parent, width:100%, and so does the child p element applied rule 2 above. If the width is set by an author:</p>
+
+<pre><code> div{
+     border: solid 1px black;
+     width:100px; /* the width is set */
+ }
+ p{
+     border: solid 1px black;
+ }
+</code></pre>
+
+<p>The whole visual formatting changed as bellow:</p>
+
+<p><img src="/images/posts/css/divset.png" alt="block" /></p>
+
+<p>However, a width definition of a child element has no effect on its parent, it doesn&rsquo;t have the control:</p>
+
+<pre><code> div{
+     border: solid 1px black;         
+ }
+ p{
+     border: solid 1px black;
+     width:100px; /* the width is set */
+ }
+</code></pre>
+
+<p>Result:</p>
+
+<p><img src="/images/posts/css/pset.png" alt="block" /></p>
+
+<p>You can change the width of the box of the p element by assigning a padding or margin value to it:</p>
+
+<pre><code> div{
+     border: solid 1px black;         
+ }
+ p{
+     border: solid 1px black;
+     width:100px; /* the width is set */
+     padding:100px; /* the padding is set */
+ }
+</code></pre>
+
+<p>By using the power of padding, the redundant div tag could be removed, if your goal is to creating a box like this:</p>
+
+<p><img src="http://sparkmorry.github.io/images/posts/css/padding.png" style="width:300px;"></img></p>
+
+<p>The whitespace of the border and the centered form could be made simply by using a padding instead of alot of sizing and centering work.</p>
+
+<p>Here, another way of determining the size of an element is called <strong>Block Formatting Context(BFC)</strong> mentioned in CSS Mastery which is often used for the height collapse problem of the blocks with floated children. Conversely, the mechanism goes the posite way from the nomal formatting. When an element is triggered with the BFC, it is responsible for sizing and positioning itself and its children. It common with the widely known <strong>hasLayout</strong> feature in IE browser. That means it decides it size(width and height) and position based on its children instead od its parent. We can see it from the height collapse problem, suppose we have a list:</p>
+
+<pre><code>&lt;ul&gt;
+    &lt;li&gt;1&lt;/li&gt;
+    &lt;li&gt;2&lt;/li&gt;
+    &lt;li&gt;3&lt;/li&gt;
+    &lt;li&gt;4&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>and style sheet:</p>
+
+<pre><code>ul{
+    border: solid 1px red;
+    text-align:center;
+    vertical-align:baseline;
+    list-style: none;
+}
+
+
+li{
+    border: solid 1px black;
+    float:left;
+    margin:100px;
+}
+</code></pre>
+
+<p>Result:
+<img src="/images/posts/css/float.png" alt="block" /></p>
+
+<p>we mark the border of ul as red so that to identify the parent element, we can see that the height is collapsed. Why does this happen?</p>
+
+<p>While the width of an element is determined by its parent&rsquo;s width, the height of it is enclosed by its children, with a prerequisite that the children are in the normal flow. Setting an element a float style(this happen in absolute positioning as well) takes it out of the normal flow-positioning model, while the parent element is still in the flow. The parent cannot find any children in its normal flow model, thus the height gose to zero when enclosing the box, like how you see in the pic above.</p>
+
+<p>A popular solution to this problem is setting an <strong>overflow:hidden</strong> style to the perent. And that is where Block Formatting Context is triggered. As we mentioned:</p>
+
+<blockquote><p>When an element is triggered with the BFC, it is responsible for sizing and positioning itself and its children.</p></blockquote>
+
+<p>The word <strong>responsible</strong> explicates how the BFC works: it is forsed to cauculate the height based on its children&rsquo;s height no matter if they are in normal-positioning flow or not. A block formatting context is created by one of the following:</p>
+
+<ul>
+<li>float other than none</li>
+<li>position fixed or absolute</li>
+<li>display inline block</li>
+<li>table cells (elements with display: table-cell, which is the default for HTML table cells)</li>
+<li>table captions (elements with display: table-caption, which is the default for HTML table captions)</li>
+<li>overflow other than visible</li>
+<li>flex boxes (elements with display: flex or inline-flex)</li>
+</ul>
+
+
+<p>Notice here the trigger is about the parent, that means, the float, absolute psition, or overflow:hidden is set to the parent, we can see the results:</p>
+
+<p>By set overflow: hidden:
+<img src="/images/posts/css/overflow.png" alt="block" />
+By set float: left or position: absolute:
+<img src="/images/posts/css/abso.png" alt="block" /></p>
+
+<h3>Summary</h3>
+
+<p>Those are almost the main machenisms of the Visual Formatting Model in CSS. And here are the three formatting models in CSS: normal flow, absolute positioning, and floating. We can figure out the first one by rule 1 and rule 2 in the artucle, while the last two is a little more complicated to figure by the Block Formatting Context. There are always multiple solutions when dealing withe css problems, it is a good way to practice and learn from the cases.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Use CSS More Efficiently]]></title>
+    <link href="http://sparkmorry.github.io/blog/2014/02/16/how-to-use-css-more-efficient/"/>
+    <updated>2014-02-16T13:00:05+08:00</updated>
+    <id>http://sparkmorry.github.io/blog/2014/02/16/how-to-use-css-more-efficient</id>
+    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;It all starts from a <a href="http://stackoverflow.com/questions/1875852/define-colors-as-variables-in-css">question</a> on stackoverflow. I have been working on the website <a href="http://www.weixinfr.com/">weixinfr</a> these days, as we haven&rsquo;t decided the main color style yet, it troubles me repeatedly changing from color to color. For instance, I use red as the color of active link, some titles, the background color of buttons and some selectors. But what if I want to change the color style to green next time? Should I find all the &ldquo;red&rdquo;(or #whatever) keyword in the text and determine on each fragment if it is the one to change?</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Color, font, positioning are the main functions of css, I used to define all of them on a certeain box, like:</p>
+
+<p>for box1:</p>
+
+<pre><code>#nav-wrapper{
+    position:fixed;  //positioning
+    height: 60px;
+    z-index: 60;
+    width: 100%;
+    padding: 0;
+    margin:0;
+    text-align: center;   //for text
+    background-color: #fff;    //bg-color
+    color: red;
+    border-bottom: solid 1px #ececec;     //color
+}
+</code></pre>
+
+<p>for box2, repeatedly:</p>
+
+<pre><code>#login-form{
+    text-align: left;
+    color: white;
+    position: absolute;
+    top: 70px;
+    right: 80px; 
+    z-index: 80;
+    display: block;
+    background-color: rgba(0,0,0,0.4); 
+    padding: 20px 35px;
+}
+</code></pre>
+
+<p>so everytime I am going to change, I have to check every box to change the color. The idea comes into my mind that how can I use a variable to store the number of the color, and put it somewhere I use it? I know something like <a href="http://lesscss.org/">less</a> makes it possible, but I also want some css solutions. Some anwsers on stackoverflow really inspires me. Colour reference chart, CSS3 variables, sass/scss, grouping the selectors only on color, and setting up a .red class
+Actually, I suppose the idea of the last two are the same: always group up the common style/feature togeter. One of the most exciting things in css is each element can have more than one class. To compare with the 2 solutions, we can still find some differences though. By defining a class called &ldquo;red_text&rdquo;, I am forced to guess to which element that class could refer to remove or add the class, and things are already starting to get confusing. And once I want to change the color to green, I have to rename it &ldquo;green_text&rdquo; for the readability, and do the find-replace routine to update the whole html file.</p>
+
+<pre><code>.red{color:red;}
+</code></pre>
+
+<p>The new problem is mentioned in the book &lt;<a href="http://book.douban.com/subject/3887227/">CSS Mastery</a>>:</p>
+
+<blockquote><p>It makes sense to name your elements based on what they are rather than how they look. That way your code will have more meaning and never go out of sync with your designs.</p></blockquote>
+
+<p>He also gives a pic for the recommanded names as below:</br>
+<img src="http://sparkmorry.github.io/images/posts/css/naming.jpg"/></p>
+
+<p> Alternatively, the second one makes it a little better, it only deals with the css file. But the trouble is you need to be careful about the selectors and probably generate a long chaind of ID selectors like:</p>
+
+<pre><code>#section1, #section2, #section3, #section4 {color:red;}
+</code></pre>
+
+<p>It is caused by the unstructual code like how I used to add classes/ids to nearly everything in an attempt to get fine-grained control over the styles. The debates between Id and Class is also a problem we encountered when styling. With the overreliance on id or class names, we will run out of unique names very quickly and end up creating extremely long and complicated naming conventions.
+A combined solution is given by the author, create a generic class for them all.</p>
+
+<p>  To conclude, a good choice is to name the elements based on what they are, like popout/highlight, warning, etc, and group up common features in a class, like combine foot_nav, top_nav, aside_nav to nav and use ID to identify something extremely specific. And group up the classes, elements, IDs in common feature into a style instaed of assigning them seperately.</p>
+
+<pre><code>.popout, h1, .warning {color:red}
+</code></pre>
+
+<p>There is no right answer, it all defers from the authors and the circumstances. New techs will lead up a new generation, gives new solutions. Let me end up with the quote of CSS Mastery:</p>
+
+<blockquote><p>Although the goal is to keep your code as lean and mean(ingful) as possible, sometimes you cannot avoid adding an extra nonsemantic div or span to get the page to display the way you want. If this is the case, don’t fret too much over it. We live in a transitional period, and CSS 3 will give us much greater control of our documents. In the meantime, real-world needs often have to come before theory. The trick is knowing when you have to make a compromise and if you are doing it for the right reasons.</p></blockquote>
 ]]></content>
   </entry>
   

@@ -224,11 +224,71 @@
 
 <p>By using the power of padding, the redundant div tag could be removed, if your goal is to creating a box like this:</p>
 
-<p><img src="/images/posts/css/padding.png" alt="block" /></p>
+<p><img src="/images/posts/css/padding.png" style="width:300px;"></img></p>
 
-<p>The whitespace of the border and the centered form could be made simply by using a padding instead of alot of centering work.</p>
+<p>The whitespace of the border and the centered form could be made simply by using a padding instead of alot of sizing and centering work.</p>
 
-<p>Here, another way of determining the size of an element is called Block Formatting Context(BFC) mentioned in CSS Mastery which is often used for the height collapse problem of the blocks with floated children. Conversely, the mechanism goes the posite way from the nomal formatting, when an element is triggered with the BFC, he is responsible for sizing and positioning itself and its children. It common with the widely known <strong>hasLayout</strong> feature in IE browser.</p>
+<p>Here, another way of determining the size of an element is called <strong>Block Formatting Context(BFC)</strong> mentioned in CSS Mastery which is often used for the height collapse problem of the blocks with floated children. Conversely, the mechanism goes the posite way from the nomal formatting. When an element is triggered with the BFC, it is responsible for sizing and positioning itself and its children. It common with the widely known <strong>hasLayout</strong> feature in IE browser. That means it decides it size(width and height) and position based on its children instead od its parent. We can see it from the height collapse problem, suppose we have a list:</p>
+
+<pre><code>&lt;ul&gt;
+    &lt;li&gt;1&lt;/li&gt;
+    &lt;li&gt;2&lt;/li&gt;
+    &lt;li&gt;3&lt;/li&gt;
+    &lt;li&gt;4&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>and style sheet:</p>
+
+<pre><code>ul{
+    border: solid 1px red;
+    text-align:center;
+    vertical-align:baseline;
+    list-style: none;
+}
+
+
+li{
+    border: solid 1px black;
+    float:left;
+    margin:100px;
+}
+</code></pre>
+
+<p>Result:
+<img src="/images/posts/css/float.png" alt="block" /></p>
+
+<p>we mark the border of ul as red so that to identify the parent element, we can see that the height is collapsed. Why does this happen?</p>
+
+<p>While the width of an element is determined by its parent&rsquo;s width, the height of it is enclosed by its children, with a prerequisite that the children are in the normal flow. Setting an element a float style(this happen in absolute positioning as well) takes it out of the normal flow-positioning model, while the parent element is still in the flow. The parent cannot find any children in its normal flow model, thus the height gose to zero when enclosing the box, like how you see in the pic above.</p>
+
+<p>A popular solution to this problem is setting an <strong>overflow:hidden</strong> style to the perent. And that is where Block Formatting Context is triggered. As we mentioned:</p>
+
+<blockquote><p>When an element is triggered with the BFC, it is responsible for sizing and positioning itself and its children.</p></blockquote>
+
+<p>The word <strong>responsible</strong> explicates how the BFC works: it is forsed to cauculate the height based on its children&rsquo;s height no matter if they are in normal-positioning flow or not. A block formatting context is created by one of the following:</p>
+
+<ul>
+<li>float other than none</li>
+<li>position fixed or absolute</li>
+<li>display inline block</li>
+<li>table cells (elements with display: table-cell, which is the default for HTML table cells)</li>
+<li>table captions (elements with display: table-caption, which is the default for HTML table captions)</li>
+<li>overflow other than visible</li>
+<li>flex boxes (elements with display: flex or inline-flex)</li>
+</ul>
+
+
+<p>Notice here the trigger is about the parent, that means, the float, absolute psition, or overflow:hidden is set to the parent, we can see the results:</p>
+
+<p>By set overflow: hidden:
+<img src="/images/posts/css/overflow.png" alt="block" />
+By set float: left or position: absolute:
+<img src="/images/posts/css/abso.png" alt="block" /></p>
+
+<h3>Summary</h3>
+
+<p>Those are almost the main machenisms of the Visual Formatting Model in CSS. And here are the three formatting models in CSS: normal flow, absolute positioning, and floating. We can figure out the first one by rule 1 and rule 2 in the artucle, while the last two is a little more complicated to figure by the Block Formatting Context. There are always multiple solutions when dealing withe css problems, it is a good way to practice and learn from the cases.</p>
 </div>
   
   
@@ -1022,7 +1082,7 @@ Name();  //调用匿名函数
 
 <section>
 <h1>Category</h1>
-<span class='categories_tag'> <a href='/blog/categories/assembly' style='font-size: 112.0%'>Assembly(1)</a>  <a href='/blog/categories/computer-graph' style='font-size: 148.0%'>Computer graph(4)</a>  <a href='/blog/categories/computer-vision' style='font-size: 112.0%'>Computer vision(1)</a>  <a href='/blog/categories/css' style='font-size: 112.0%'>Css(1)</a>  <a href='/blog/categories/css' style='font-size: 112.0%'>Css(1)</a>  <a href='/blog/categories/css' style='font-size: 112.0%'>Css(1)</a>  <a href='/blog/categories/image-processing' style='font-size: 112.0%'>Image processing(1)</a>  <a href='/blog/categories/javascript' style='font-size: 160.0%'>Javascript(5)</a>  <a href='/blog/categories/life' style='font-size: 112.0%'>Life(1)</a>  <a href='/blog/categories/mac' style='font-size: 124.0%'>Mac(2)</a>  <a href='/blog/categories/octopress' style='font-size: 112.0%'>Octopress(1)</a>  <a href='/blog/categories/opencv' style='font-size: 112.0%'>Opencv(1)</a>  <a href='/blog/categories/pil' style='font-size: 112.0%'>Pil(1)</a>  <a href='/blog/categories/python' style='font-size: 112.0%'>Python(1)</a>  <a href='/blog/categories/thoughts' style='font-size: 124.0%'>Thoughts(2)</a> </span>
+<span class='categories_tag'> <a href='/blog/categories/assembly' style='font-size: 112.0%'>Assembly(1)</a>  <a href='/blog/categories/computer-graph' style='font-size: 148.0%'>Computer graph(4)</a>  <a href='/blog/categories/computer-vision' style='font-size: 112.0%'>Computer vision(1)</a>  <a href='/blog/categories/css' style='font-size: 136.0%'>Css(3)</a>  <a href='/blog/categories/image-processing' style='font-size: 112.0%'>Image processing(1)</a>  <a href='/blog/categories/javascript' style='font-size: 160.0%'>Javascript(5)</a>  <a href='/blog/categories/life' style='font-size: 112.0%'>Life(1)</a>  <a href='/blog/categories/mac' style='font-size: 124.0%'>Mac(2)</a>  <a href='/blog/categories/octopress' style='font-size: 112.0%'>Octopress(1)</a>  <a href='/blog/categories/opencv' style='font-size: 112.0%'>Opencv(1)</a>  <a href='/blog/categories/pil' style='font-size: 112.0%'>Pil(1)</a>  <a href='/blog/categories/python' style='font-size: 112.0%'>Python(1)</a>  <a href='/blog/categories/thoughts' style='font-size: 124.0%'>Thoughts(2)</a> </span>
 </section>
 
 
