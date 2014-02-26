@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Javascript | Morry's Blog]]></title>
   <link href="http://sparkmorry.github.io/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://sparkmorry.github.io/"/>
-  <updated>2014-02-25T20:10:34+08:00</updated>
+  <updated>2014-02-26T17:16:16+08:00</updated>
   <id>http://sparkmorry.github.io/</id>
   <author>
     <name><![CDATA[Mengli Xia]]></name>
@@ -12,6 +12,136 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Javascript Closure]]></title>
+    <link href="http://sparkmorry.github.io/blog/2014/02/26/javascript-closure/"/>
+    <updated>2014-02-26T14:46:25+08:00</updated>
+    <id>http://sparkmorry.github.io/blog/2014/02/26/javascript-closure</id>
+    <content type="html"><![CDATA[<p>It took me days to really understand what a closure is in javascript, and finally I have grokked the core concept. And here are some share to whom is new to the language like me. And this article is for some basic concepts about javascript functions, which is very important when learning the closure.</p>
+
+<p>It is a little hard to get the concept by the definition. I have been reading articles and books these days to understand how javascript function works, which seems so different from other languages like C, Python, etc. The more you get, the more confused you are, as people have really different understandings. Some of them are confusing, and some of them are misunderstanding or even wrong, as everyone makes mistakes. And finally I come to the idea that the best way to learn it is typing the code to you browser and debug to see how it works. It really helps alot. Let me explore it a little bit deeper by the examples.</p>
+
+<p>We first started by some basic concept about javascript function:</p>
+
+<h3>Definition</h3>
+
+<p>There are 3 ways to define a function in javascript:</p>
+
+<ol>
+<li>function funcname(para1, para2){ … }</li>
+<li>var funcname = function(para1, para2){ … }</li>
+<li>var funcname = Function(para1, para2, &ldquo;…&rdquo;);</li>
+</ol>
+
+
+<p>By using the first one, you are creating a function with a name funcname, which is actually a pointer to the function. It is called function <strong>declaration</strong>. By using the second two, you are creating a function which is widely know as a anonymous function. It is called a function <strong>expression</strong>, which returns a pointer, and you can assign it to a variable funcname so as to call(invoke) it. The diffrence between them is how the browser loads them into the execution context:</p>
+
+<p><strong>function declarations loads before any code is executed.</strong></p>
+
+<p><strong>While function expressions loads only when the interpreter reaches that line of code.</strong></p>
+
+<p>By declaring a function, you can call it before you have actually defined. That is because javascript has the mechanisim to raise the function decalration before any code is excuted, while you cannot do that in the second situation.</p>
+
+<h3>Invocation</h3>
+
+<p>The invocation is really different from a difinition, especially in these scrtipt language. A function is never executed until it is invoked. As metioned in <a href="http://book.douban.com/subject/2994925/">Javascript: The Good Parts</a>, there are 4 paterns of invovation in javascript:</p>
+
+<ol>
+<li>The Method Invocation Pattern</li>
+<li>The Function Invocation Pattern</li>
+<li>The Constructor Invocation Pattern</li>
+<li>The Apply Invocation Pattern</li>
+</ol>
+
+
+<p>The difference between them is how the special varible <strong>this</strong> is initialized.</p>
+
+<h4>The method invocation pattern</h4>
+
+<p>If an invocation expression con- tains a refinement (that is, a . dot expression or [subscript] expression), it is invoked as a method. A common patern is like:</p>
+
+<pre><code>var num = Myobject.method(para1, para2);
+</code></pre>
+
+<p>In this way, the bonus parameter <strong>this</strong> is bound to the object Myobject. That is when you alert(this) inside the function, it will alert Object Myobject.</p>
+
+<h4>The function invocation pattern</h4>
+
+<p>When a function is not the property of an object, then it is invoked as a function:</p>
+
+<pre><code> var sum = add(3, 4);    // sum is 7
+</code></pre>
+
+<p>Most of the function are invoked in this way. In this case, the bonus parameter <strong>this</strong> is bound to the global object. That is when you alert(this) inside the function, it will alert Object Global(or mostly the Window object in a browser).</p>
+
+<h4>The constructor invocation patternIf a function is invoked with the new prefix, then a new object will be created with a hidden link to the value of the function’s prototype member, and this will be bound to that new object. That is what confused me at the first glance, about how a constructor works in javascript which is made by a function without a class being defined. The author gave a clear answer that javascript is a prototypal inheritance language while offers an object-making syntax that is reminiscent of the classical languages.</h4>
+
+<h4>The apply invocation patternThe apply method lets us construct an array of arguments to use to invoke a func- tion. It also lets us choose the value of this. The apply method takes two parame- ters. The first is the value that should be bound to this. The second is an array of parameters.</h4>
+
+<p>To identify the differences, I will go to an overall example:Firstly, define an object:</p>
+
+<pre><code>function Person(){  };
+</code></pre>
+
+<p>It is just used to demonstrate the object machanism, so we actually have nothing in it.</p>
+
+<p>Secondly, create an instance called p of object Person</p>
+
+<pre><code>var p = new Person();
+</code></pre>
+
+<p>Thirdly, create a method <strong>displayneme</strong> by assigning it a function:</p>
+
+<pre><code>p.displayname=function(){
+
+    alert(this); //object p
+
+    return function dis(){ 
+        alert(this);  //window
+    }
+}
+var disp = p.displayname();  //get the pointer of the function
+disp();   //invoke it
+</code></pre>
+
+<p>If we rearrange the order of the code to:</p>
+
+<pre><code>    var p = new Person();
+    var disp = p.displayname();  //get the definition of the function
+    disp();   //invoke it, error occurs
+    p.displayname=function(){
+
+        alert(this); 
+
+        return function dis(){ 
+            alert(this);  
+        }
+    }
+    function Person(){
+    }
+</code></pre>
+
+<p>It will alert an error that Person has no method displayname, but we can still create the p instance before we define an object Person. That is because the constructor function isn raised before the code is executed, while the function p.displayname is loaded when the interpreter reaches that line.</p>
+
+<p>If we look at how the alert box shows us the <strong>this</strong> parameter, we can easily know that the inside the first function, p.displayname, this = object p, while in the second function, dis(), this = global object window. The second function, which is invoked in a function patern, it just doesn&rsquo;t have the access to the object p.</p>
+
+<p>Another way to invoke that inner function is:</p>
+
+<pre><code>p.displayname=function(){
+
+    alert(this); //object p
+
+    return function dis(){ 
+        alert(this);  //window
+    }();   // invoke directly
+}
+p.displayname();  //get the pointer of the function
+</code></pre>
+
+<p>The function about is called a self-invoking function, by adding a () after the definition of the function. In this way, we don&rsquo;t need to assign the inner function to a variable disp to invoke it, and get the result in the inner function.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[曲线参数化的Javascript实现（代码篇）]]></title>
@@ -315,101 +445,6 @@ Name();  //调用匿名函数
 
 <p>最后的结果截图如下：</br>
 <img src="http://sparkmorry.github.io/images/posts/Cardinal/t1.png" style="width:420px;"></img></br></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Cardinal样条曲线的Javascript实现(理论篇)]]></title>
-    <link href="http://sparkmorry.github.io/blog/2014/01/29/cardinalyang-tiao-qu-xian-de-javascriptshi-xian-li-lun-pian/"/>
-    <updated>2014-01-29T00:46:42+08:00</updated>
-    <id>http://sparkmorry.github.io/blog/2014/01/29/cardinalyang-tiao-qu-xian-de-javascriptshi-xian-li-lun-pian</id>
-    <content type="html"><![CDATA[<p>首先，要对样条曲线进行插值的原因是：希望通过给定的关键帧点生成一条希望的直线或者曲线。</p>
-
-<p>1.直线插值</p>
-
-<p>　　生成一条直线，给定直线首尾的关键点P0,P1，就能确定这条直线的特性，比如y=kx+b中的斜率k和y轴偏移值b。通过线性（P0,P1线性相关）插值（线性的给中间插上一定数量的点使看起来连续）的方式就可以得到我们要的线段。
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/linear.png" style="width:400px;"></img></br>
-　　　　　　　　　　图1.1</p>
-
-<p>2.曲线插值</p>
-
-<p>　　但是对于曲线来说比较难确定，我们要对于给定的参数生成唯一的一条曲线并且可以进行方便的调整。这里要确定每一小段曲线，我们需要4个参数，首尾点的位置(参数化后的P(u))及他们的方向（在代数上表现为一阶导数P'(u)的值），并进行平滑的过渡，通过插值来实现对中间点的计算。再将每个小段的曲线进行连接。<br>
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/segment.png" style="width:220px;"></img></br>
-　　　　　图2.1</p>
-
-<p>　　曲线的生成分为两个部分：</p>
-
-<p>　　　　1)对每给定的两个关键帧点之间进行插值得到一段曲线（如图2.1）</br>
-　　　　2)连接两两关键帧点的曲线段（如图2.2对曲线段进行连接）<br></p>
-
-<p><img src="http://sparkmorry.github.io/images/posts/Cardinal/kp.png" style="width:400px;"></img></br>
-　　　　　　　　图2.2</p>
-
-<p>2.1 三次多项式插值</p>
-
-<p>　　先就两个关键帧点之间的插值做计算。我的理解主要的思想是通过一个参数化的函数曲线去拟合，因此要通过给定的条件（如图2.1中的P(0),P(1),P'(0),P'(1)）去确定这个函数的几个系数。然后通过在中间等间距的插点计算根据函数得到的值确定点的位置。这里选择参数化的三次多项式(）去拟合这条曲线，通过插值来求得中间点的位置。这里，选择三次多项式的原因是：灵活性和计算速度的折中方案。</p>
-
-<p>　　1)与更高次多项式相比，三次样条只需较少的计算与存储空间，并且较为稳定；（只需要一个4*4的基函数矩阵）</br>
-　　2)与更低次多项式相比，三次样条在模拟任何曲线形状时显得更灵活。（能满足大多数情况下的曲率调整，比如二次抛物线太对称，一次就是直线）</br></p>
-
-<p>2.2 曲线连续性</p>
-
-<p>　　为了保证分段参数曲线从一段到另一端平滑过渡，可以在连接点处要求各种连续性（可以参考微积分中的函数连续性与导数的关系）。</p>
-
-<p>　　C0连续：有相同的公共点，如图(a)</br>
-　　C1连续：有相同的公共点且公共点处有相同的一阶导数（切线斜率），如图(b)</br>
-　　C2连续：有相同的公共点且有相同的公共点且公共点处有相同的一阶导数和二阶导数（切线斜率的变化率），如图c <br>
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/conti.png" style="width:400px;"></img></br>
-　　　　　　　　　　图2.3</p>
-
-<p>2.3 自然样条曲线</p>
-
-<p>　　一种简单的插值方法是自然样条插值，就是对如图2.2的一条有n+1个控制点（P0～Pn）n个分段的曲线求三次多项式系数这样就有4n个系数要确定（需要列出4n个方程才能求解出来），通过曲线内部的n－1个点每相邻曲线段公共点的一阶及二阶导数相等且都通过该点，能确定4n－4 [4*(n-1)]个方程，再加上两个“隐含”控制点P0和Pn的二阶导数为0得到4n个方程来求解。缺点是一个点发生了变化其他点都跟着受到影响，这里不做主要展开了。　　　　　　　　　　　　</p>
-
-<p>2.4 Hermite插值</p>
-
-<p>　　为了解决自然样条曲线不能局部控制的缺点，Hermite插值对每个控制点的切线进行了限制为D（由用户给出），这样切线就变成了D*Pk（D斜率＋经过该点），使每个曲线段仅依赖于端点位置的约束。如对每小段曲线的边界条件表示为：</br>
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/hermite1.png" style="width:120px;"></img></br>
-公式1</p>
-
-<p>这里P是向量，对于xy分量来说分别都符合这个边界条件。那么如何保证曲线连续的呢？即对于一个连接点Pk-1来说，这段曲线相应的终点为Pk，在下一段曲线里Pk则作为这段曲线的起始点，保证Pk这个点的函数值和导数值相等就可以。现在点的位置都是Pk，导数值都是DPk，二阶导数值都是D。</p>
-
-<p>可以写出向量方程：</br>
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/hermite2.png" style="width:300px;"></img></p>
-
-<p>其中P和abcd都是向量，可以再xy分量上（2维情况下）分别表达成这种形式，如，y分量也是类似，组合成的表达，可以获得等价的矩阵形式表达：</p>
-
-<p>以及导数的矩阵表达式：</br>
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/hermite3.png" style="width:200px;"></img></p>
-
-<p>通过公式1，用u＝0和u＝1替代上面的u就可以得到以下方程：
-</br>
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/hermite4.png" style="width:200px;"></img></br></p>
-
-<p>如Pk=P(0)=[0 0 0 1]*[a b c d]&lsquo;，这里每一个曲线段上的点都被参数化到0～1之间，所以起始点就是P(0),终止点就是P(1)，利用线代方法（参考线性方程求解）通过4个参数对多项式系数求解</br>
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/hermite5.png" style="width:250px;"></img></br></p>
-
-<p>最后边界条件的表达式如下</br>
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/hermite6.png" style="width:250px;"></img></br></p>
-
-<p>其中M*P部分就是通过对Hermite函数推导得到的系数矩阵[a b c d]&lsquo;，Pk和Pk+1由用户给定，DPk和DPk+1由给定D值计算获得，根据不同的控制方式可以生成有不同曲线，Cardinal曲线就是Hermite曲线的一种变形，通过对切线斜率进行控制来控制曲线的平滑度。</p>
-
-<p>2.5 Cardinal样条曲线</p>
-
-<p> 　　因为在Hermite曲线中斜率D还是需要用户给出，Cardinal样条曲线可以由相邻两控制点坐标来计算斜率从而使曲线完全由控制点Pk来决定，但是在这里引入了一个t作为在每个公共点上尖锐程度的控制值。</p>
-
-<p>Cardinal曲线的边界条件方程：</br>
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/Cardinal1.png" style="width:180px;"></img></br>
-这样控制点Pk和Pk+1处的斜率和弦PkPk+2和PkPk+1成正比（理解为表示比较接近的控制点对曲线曲率的影响）</br>
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/Cardinal2.png" style="width:230px;"></img></br>
-其中t（称为张量）控制Cardinal样条和输入控制点之间的松紧程度，对曲线的影响程度可以通过下图看出来</br>
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/Cardinal3.png" style="width:230px;"></img></br>
-通过跟Hermite类似的系数求解方式，将边界条件代入可以得到矩阵表达式：</p>
-
-<p>P(u)</br>
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/Cardinal4.png" style="width:300px;"></img></br>
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/Cardinal5.png" style="width:220px;"></img>，其中
-<img src="http://sparkmorry.github.io/images/posts/Cardinal/Cardinal6.png" style="width:220px;"></img></br></p>
 ]]></content>
   </entry>
   
