@@ -4,7 +4,7 @@
   <title><![CDATA[Morry's Blog]]></title>
   <link href="http://sparkmorry.github.io/atom.xml" rel="self"/>
   <link href="http://sparkmorry.github.io/"/>
-  <updated>2014-02-26T17:19:11+08:00</updated>
+  <updated>2014-02-26T22:35:25+08:00</updated>
   <id>http://sparkmorry.github.io/</id>
   <author>
     <name><![CDATA[Mengli Xia]]></name>
@@ -75,11 +75,14 @@
 
 <p>Most of the function are invoked in this way. In this case, the bonus parameter <strong>this</strong> is bound to the global object. That is when you alert(this) inside the function, it will alert Object Global(or mostly the Window object in a browser).</p>
 
-<h4>The constructor invocation patternIf a function is invoked with the new prefix, then a new object will be created with a hidden link to the value of the function’s prototype member, and this will be bound to that new object. That is what confused me at the first glance, about how a constructor works in javascript which is made by a function without a class being defined. The author gave a clear answer that javascript is a prototypal inheritance language while offers an object-making syntax that is reminiscent of the classical languages.</h4>
+<h4>The constructor invocation pattern</h4>
 
-<h4>The apply invocation patternThe apply method lets us construct an array of arguments to use to invoke a func- tion. It also lets us choose the value of this. The apply method takes two parame- ters. The first is the value that should be bound to this. The second is an array of parameters.</h4>
+<p>If a function is invoked with the new prefix, then a new object will be created with a hidden link to the value of the function’s prototype member, and this will be bound to that new object. That is what confused me at the first glance, about how a constructor works in javascript which is made by a function without a class being defined. The author gave a clear answer that javascript is a prototypal inheritance language while offers an object-making syntax that is reminiscent of the classical languages.</p>
 
-<p>To identify the differences, I will go to an overall example:Firstly, define an object:</p>
+<h4>The apply invocation pattern</h4>
+
+<p>The apply method lets us construct an array of arguments to use to invoke a func- tion. It also lets us choose the value of this. The apply method takes two parame- ters. The first is the value that should be bound to this. The second is an array of parameters.
+To identify the differences, I will go to an overall example:Firstly, define an object:</p>
 
 <pre><code>function Person(){  };
 </code></pre>
