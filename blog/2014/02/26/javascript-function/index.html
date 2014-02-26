@@ -1,0 +1,379 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Javascript Function - Morry's Blog</title>
+  <meta name="author" content="Mengli Xia">
+
+  
+  <meta name="description" content="It took me days to really understand what a closure is in javascript, and finally I have grokked the core concept. And here are some share to whom is &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sparkmorry.github.io/blog/2014/02/26/javascript-function">
+  <link href="/icon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Morry's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48160253-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Morry's Blog</a></h1>
+  
+    <h2>A wizzard is never late.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sparkmorry.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/painting">Gallery</a></li>
+  <li><a href="/projects">Projects</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Javascript Function</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-26T17:18:30+08:00" pubdate data-updated="true">Feb 26<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>It took me days to really understand what a closure is in javascript, and finally I have grokked the core concept. And here are some share to whom is new to the language like me. And this article is for some basic concepts about javascript functions, which is very important when learning the closure.</p>
+
+<p>It is a little hard to get the concept by the definition. I have been reading articles and books these days to understand how javascript function works, which seems so different from other languages like C, Python, etc. The more you get, the more confused you are, as people have really different understandings. Some of them are confusing, and some of them are misunderstanding or even wrong, as everyone makes mistakes. And finally I come to the idea that the best way to learn it is typing the code to you browser and debug to see how it works. It really helps alot. Let me explore it a little bit deeper by the examples.</p>
+
+<p>We first started by some basic concept about javascript function:</p>
+
+<h3>Definition</h3>
+
+<p>There are 3 ways to define a function in javascript:</p>
+
+<ol>
+<li>function funcname(para1, para2){ … }</li>
+<li>var funcname = function(para1, para2){ … }</li>
+<li>var funcname = Function(para1, para2, &ldquo;…&rdquo;);</li>
+</ol>
+
+
+<p>By using the first one, you are creating a function with a name funcname, which is actually a pointer to the function. It is called function <strong>declaration</strong>. By using the second two, you are creating a function which is widely know as a anonymous function. It is called a function <strong>expression</strong>, which returns a pointer, and you can assign it to a variable funcname so as to call(invoke) it. The diffrence between them is how the browser loads them into the execution context:</p>
+
+<p><strong>function declarations loads before any code is executed.</strong></p>
+
+<p><strong>While function expressions loads only when the interpreter reaches that line of code.</strong></p>
+
+<p>By declaring a function, you can call it before you have actually defined. That is because javascript has the mechanisim to raise the function decalration before any code is excuted, while you cannot do that in the second situation.</p>
+
+<h3>Invocation</h3>
+
+<p>The invocation is really different from a difinition, especially in these scrtipt language. A function is never executed until it is invoked. As metioned in <a href="http://book.douban.com/subject/2994925/">Javascript: The Good Parts</a>, there are 4 paterns of invovation in javascript:</p>
+
+<ol>
+<li>The Method Invocation Pattern</li>
+<li>The Function Invocation Pattern</li>
+<li>The Constructor Invocation Pattern</li>
+<li>The Apply Invocation Pattern</li>
+</ol>
+
+
+<p>The difference between them is how the special varible <strong>this</strong> is initialized.</p>
+
+<h4>The method invocation pattern</h4>
+
+<p>If an invocation expression con- tains a refinement (that is, a . dot expression or [subscript] expression), it is invoked as a method. A common patern is like:</p>
+
+<pre><code>var num = Myobject.method(para1, para2);
+</code></pre>
+
+<p>In this way, the bonus parameter <strong>this</strong> is bound to the object Myobject. That is when you alert(this) inside the function, it will alert Object Myobject.</p>
+
+<h4>The function invocation pattern</h4>
+
+<p>When a function is not the property of an object, then it is invoked as a function:</p>
+
+<pre><code> var sum = add(3, 4);    // sum is 7
+</code></pre>
+
+<p>Most of the function are invoked in this way. In this case, the bonus parameter <strong>this</strong> is bound to the global object. That is when you alert(this) inside the function, it will alert Object Global(or mostly the Window object in a browser).</p>
+
+<h4>The constructor invocation patternIf a function is invoked with the new prefix, then a new object will be created with a hidden link to the value of the function’s prototype member, and this will be bound to that new object. That is what confused me at the first glance, about how a constructor works in javascript which is made by a function without a class being defined. The author gave a clear answer that javascript is a prototypal inheritance language while offers an object-making syntax that is reminiscent of the classical languages.</h4>
+
+<h4>The apply invocation patternThe apply method lets us construct an array of arguments to use to invoke a func- tion. It also lets us choose the value of this. The apply method takes two parame- ters. The first is the value that should be bound to this. The second is an array of parameters.</h4>
+
+<p>To identify the differences, I will go to an overall example:Firstly, define an object:</p>
+
+<pre><code>function Person(){  };
+</code></pre>
+
+<p>It is just used to demonstrate the object machanism, so we actually have nothing in it.</p>
+
+<p>Secondly, create an instance called p of object Person</p>
+
+<pre><code>var p = new Person();
+</code></pre>
+
+<p>Thirdly, create a method <strong>displayneme</strong> by assigning it a function:</p>
+
+<pre><code>p.displayname=function(){
+
+    alert(this); //object p
+
+    return function dis(){ 
+        alert(this);  //window
+    }
+}
+var disp = p.displayname();  //get the pointer of the function
+disp();   //invoke it
+</code></pre>
+
+<p>If we rearrange the order of the code to:</p>
+
+<pre><code>    var p = new Person();
+    var disp = p.displayname();  //get the definition of the function
+    disp();   //invoke it, error occurs
+    p.displayname=function(){
+
+        alert(this); 
+
+        return function dis(){ 
+            alert(this);  
+        }
+    }
+    function Person(){
+    }
+</code></pre>
+
+<p>It will alert an error that Person has no method displayname, but we can still create the p instance before we define an object Person. That is because the constructor function isn raised before the code is executed, while the function p.displayname is loaded when the interpreter reaches that line.</p>
+
+<p>If we look at how the alert box shows us the <strong>this</strong> parameter, we can easily know that the inside the first function, p.displayname, this = object p, while in the second function, dis(), this = global object window. The second function, which is invoked in a function patern, it just doesn&rsquo;t have the access to the object p.</p>
+
+<p>Another way to invoke that inner function is:</p>
+
+<pre><code>p.displayname=function(){
+
+    alert(this); //object p
+
+    return function dis(){ 
+        alert(this);  //window
+    }();   // invoke directly
+}
+p.displayname();  //get the pointer of the function
+</code></pre>
+
+<p>The function about is called a self-invoking function, by adding a () after the definition of the function. In this way, we don&rsquo;t need to assign the inner function to a variable disp to invoke it, and get the result in the inner function.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Mengli Xia</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-26T17:18:30+08:00" pubdate data-updated="true">Feb 26<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sparkmorry.github.io/blog/2014/02/26/javascript-function/" data-via="" data-counturl="http://sparkmorry.github.io/blog/2014/02/26/javascript-function/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/02/26/javascript-closure/" title="Previous Post: Javascript Closure">&laquo; Javascript Closure</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>A little something about me.</p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/02/26/javascript-function/">Javascript Function</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/26/javascript-closure/">Javascript Closure</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/23/css-crossbrowser-compatibility/">CSS Crossbrowser Compatibility</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/21/how-css-visual-formatting-model-works/">How CSS Visual Formatting Model Works</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/18/he-is-going-to-princeton/">He Is Going to Princeton</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+<h1>Category</h1>
+<span class='categories_tag'> <a href='/blog/categories/assembly' style='font-size: 110.0%'>Assembly(1)</a>  <a href='/blog/categories/computer-graph' style='font-size: 140.0%'>Computer graph(4)</a>  <a href='/blog/categories/computer-vision' style='font-size: 110.0%'>Computer vision(1)</a>  <a href='/blog/categories/css' style='font-size: 130.0%'>Css(3)</a>  <a href='/blog/categories/image-processing' style='font-size: 110.0%'>Image processing(1)</a>  <a href='/blog/categories/javascript' style='font-size: 160.0%'>Javascript(6)</a>  <a href='/blog/categories/life' style='font-size: 110.0%'>Life(1)</a>  <a href='/blog/categories/mac' style='font-size: 120.0%'>Mac(2)</a>  <a href='/blog/categories/octopress' style='font-size: 110.0%'>Octopress(1)</a>  <a href='/blog/categories/opencv' style='font-size: 110.0%'>Opencv(1)</a>  <a href='/blog/categories/pil' style='font-size: 110.0%'>Pil(1)</a>  <a href='/blog/categories/python' style='font-size: 110.0%'>Python(1)</a>  <a href='/blog/categories/thoughts' style='font-size: 120.0%'>Thoughts(2)</a> </span>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Mengli Xia -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sparkmorrygithubio';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sparkmorry.github.io/blog/2014/02/26/javascript-function/';
+        var disqus_url = 'http://sparkmorry.github.io/blog/2014/02/26/javascript-function/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

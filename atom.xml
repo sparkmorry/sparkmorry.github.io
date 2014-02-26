@@ -4,7 +4,7 @@
   <title><![CDATA[Morry's Blog]]></title>
   <link href="http://sparkmorry.github.io/atom.xml" rel="self"/>
   <link href="http://sparkmorry.github.io/"/>
-  <updated>2014-02-26T17:16:16+08:00</updated>
+  <updated>2014-02-26T17:19:11+08:00</updated>
   <id>http://sparkmorry.github.io/</id>
   <author>
     <name><![CDATA[Mengli Xia]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Javascript Closure]]></title>
-    <link href="http://sparkmorry.github.io/blog/2014/02/26/javascript-closure/"/>
-    <updated>2014-02-26T14:46:25+08:00</updated>
-    <id>http://sparkmorry.github.io/blog/2014/02/26/javascript-closure</id>
+    <title type="html"><![CDATA[Javascript Function]]></title>
+    <link href="http://sparkmorry.github.io/blog/2014/02/26/javascript-function/"/>
+    <updated>2014-02-26T17:18:30+08:00</updated>
+    <id>http://sparkmorry.github.io/blog/2014/02/26/javascript-function</id>
     <content type="html"><![CDATA[<p>It took me days to really understand what a closure is in javascript, and finally I have grokked the core concept. And here are some share to whom is new to the language like me. And this article is for some basic concepts about javascript functions, which is very important when learning the closure.</p>
 
 <p>It is a little hard to get the concept by the definition. I have been reading articles and books these days to understand how javascript function works, which seems so different from other languages like C, Python, etc. The more you get, the more confused you are, as people have really different understandings. Some of them are confusing, and some of them are misunderstanding or even wrong, as everyone makes mistakes. And finally I come to the idea that the best way to learn it is typing the code to you browser and debug to see how it works. It really helps alot. Let me explore it a little bit deeper by the examples.</p>
@@ -140,6 +140,15 @@ p.displayname();  //get the pointer of the function
 </code></pre>
 
 <p>The function about is called a self-invoking function, by adding a () after the definition of the function. In this way, we don&rsquo;t need to assign the inner function to a variable disp to invoke it, and get the result in the inner function.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Javascript Closure]]></title>
+    <link href="http://sparkmorry.github.io/blog/2014/02/26/javascript-closure/"/>
+    <updated>2014-02-26T14:46:25+08:00</updated>
+    <id>http://sparkmorry.github.io/blog/2014/02/26/javascript-closure</id>
+    <content type="html"><![CDATA[
 ]]></content>
   </entry>
   

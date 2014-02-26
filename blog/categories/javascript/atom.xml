@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Javascript | Morry's Blog]]></title>
   <link href="http://sparkmorry.github.io/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://sparkmorry.github.io/"/>
-  <updated>2014-02-26T17:16:16+08:00</updated>
+  <updated>2014-02-26T17:19:11+08:00</updated>
   <id>http://sparkmorry.github.io/</id>
   <author>
     <name><![CDATA[Mengli Xia]]></name>
@@ -18,128 +18,7 @@
     <link href="http://sparkmorry.github.io/blog/2014/02/26/javascript-closure/"/>
     <updated>2014-02-26T14:46:25+08:00</updated>
     <id>http://sparkmorry.github.io/blog/2014/02/26/javascript-closure</id>
-    <content type="html"><![CDATA[<p>It took me days to really understand what a closure is in javascript, and finally I have grokked the core concept. And here are some share to whom is new to the language like me. And this article is for some basic concepts about javascript functions, which is very important when learning the closure.</p>
-
-<p>It is a little hard to get the concept by the definition. I have been reading articles and books these days to understand how javascript function works, which seems so different from other languages like C, Python, etc. The more you get, the more confused you are, as people have really different understandings. Some of them are confusing, and some of them are misunderstanding or even wrong, as everyone makes mistakes. And finally I come to the idea that the best way to learn it is typing the code to you browser and debug to see how it works. It really helps alot. Let me explore it a little bit deeper by the examples.</p>
-
-<p>We first started by some basic concept about javascript function:</p>
-
-<h3>Definition</h3>
-
-<p>There are 3 ways to define a function in javascript:</p>
-
-<ol>
-<li>function funcname(para1, para2){ … }</li>
-<li>var funcname = function(para1, para2){ … }</li>
-<li>var funcname = Function(para1, para2, &ldquo;…&rdquo;);</li>
-</ol>
-
-
-<p>By using the first one, you are creating a function with a name funcname, which is actually a pointer to the function. It is called function <strong>declaration</strong>. By using the second two, you are creating a function which is widely know as a anonymous function. It is called a function <strong>expression</strong>, which returns a pointer, and you can assign it to a variable funcname so as to call(invoke) it. The diffrence between them is how the browser loads them into the execution context:</p>
-
-<p><strong>function declarations loads before any code is executed.</strong></p>
-
-<p><strong>While function expressions loads only when the interpreter reaches that line of code.</strong></p>
-
-<p>By declaring a function, you can call it before you have actually defined. That is because javascript has the mechanisim to raise the function decalration before any code is excuted, while you cannot do that in the second situation.</p>
-
-<h3>Invocation</h3>
-
-<p>The invocation is really different from a difinition, especially in these scrtipt language. A function is never executed until it is invoked. As metioned in <a href="http://book.douban.com/subject/2994925/">Javascript: The Good Parts</a>, there are 4 paterns of invovation in javascript:</p>
-
-<ol>
-<li>The Method Invocation Pattern</li>
-<li>The Function Invocation Pattern</li>
-<li>The Constructor Invocation Pattern</li>
-<li>The Apply Invocation Pattern</li>
-</ol>
-
-
-<p>The difference between them is how the special varible <strong>this</strong> is initialized.</p>
-
-<h4>The method invocation pattern</h4>
-
-<p>If an invocation expression con- tains a refinement (that is, a . dot expression or [subscript] expression), it is invoked as a method. A common patern is like:</p>
-
-<pre><code>var num = Myobject.method(para1, para2);
-</code></pre>
-
-<p>In this way, the bonus parameter <strong>this</strong> is bound to the object Myobject. That is when you alert(this) inside the function, it will alert Object Myobject.</p>
-
-<h4>The function invocation pattern</h4>
-
-<p>When a function is not the property of an object, then it is invoked as a function:</p>
-
-<pre><code> var sum = add(3, 4);    // sum is 7
-</code></pre>
-
-<p>Most of the function are invoked in this way. In this case, the bonus parameter <strong>this</strong> is bound to the global object. That is when you alert(this) inside the function, it will alert Object Global(or mostly the Window object in a browser).</p>
-
-<h4>The constructor invocation patternIf a function is invoked with the new prefix, then a new object will be created with a hidden link to the value of the function’s prototype member, and this will be bound to that new object. That is what confused me at the first glance, about how a constructor works in javascript which is made by a function without a class being defined. The author gave a clear answer that javascript is a prototypal inheritance language while offers an object-making syntax that is reminiscent of the classical languages.</h4>
-
-<h4>The apply invocation patternThe apply method lets us construct an array of arguments to use to invoke a func- tion. It also lets us choose the value of this. The apply method takes two parame- ters. The first is the value that should be bound to this. The second is an array of parameters.</h4>
-
-<p>To identify the differences, I will go to an overall example:Firstly, define an object:</p>
-
-<pre><code>function Person(){  };
-</code></pre>
-
-<p>It is just used to demonstrate the object machanism, so we actually have nothing in it.</p>
-
-<p>Secondly, create an instance called p of object Person</p>
-
-<pre><code>var p = new Person();
-</code></pre>
-
-<p>Thirdly, create a method <strong>displayneme</strong> by assigning it a function:</p>
-
-<pre><code>p.displayname=function(){
-
-    alert(this); //object p
-
-    return function dis(){ 
-        alert(this);  //window
-    }
-}
-var disp = p.displayname();  //get the pointer of the function
-disp();   //invoke it
-</code></pre>
-
-<p>If we rearrange the order of the code to:</p>
-
-<pre><code>    var p = new Person();
-    var disp = p.displayname();  //get the definition of the function
-    disp();   //invoke it, error occurs
-    p.displayname=function(){
-
-        alert(this); 
-
-        return function dis(){ 
-            alert(this);  
-        }
-    }
-    function Person(){
-    }
-</code></pre>
-
-<p>It will alert an error that Person has no method displayname, but we can still create the p instance before we define an object Person. That is because the constructor function isn raised before the code is executed, while the function p.displayname is loaded when the interpreter reaches that line.</p>
-
-<p>If we look at how the alert box shows us the <strong>this</strong> parameter, we can easily know that the inside the first function, p.displayname, this = object p, while in the second function, dis(), this = global object window. The second function, which is invoked in a function patern, it just doesn&rsquo;t have the access to the object p.</p>
-
-<p>Another way to invoke that inner function is:</p>
-
-<pre><code>p.displayname=function(){
-
-    alert(this); //object p
-
-    return function dis(){ 
-        alert(this);  //window
-    }();   // invoke directly
-}
-p.displayname();  //get the pointer of the function
-</code></pre>
-
-<p>The function about is called a self-invoking function, by adding a () after the definition of the function. In this way, we don&rsquo;t need to assign the inner function to a variable disp to invoke it, and get the result in the inner function.</p>
+    <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
