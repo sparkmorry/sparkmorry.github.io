@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | Morry's Blog]]></title>
   <link href="http://sparkmorry.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://sparkmorry.github.io/"/>
-  <updated>2014-04-05T13:11:39+08:00</updated>
+  <updated>2014-04-05T13:12:46+08:00</updated>
   <id>http://sparkmorry.github.io/</id>
   <author>
     <name><![CDATA[Mengli Xia]]></name>
@@ -31,7 +31,7 @@
 
 <p>本来是打算用熟悉点的SQLAlchemy＋Admin直接做后台操作的，但是因为Admin的templates实在无法override（也不知道问题到底出在哪了，以后再研究一下），碰巧发现了peewee，真是很轻量级又很赞的组合，直接用peewee-orm可以做好数据库，后来发现用的正好也是SQLAlchemy的内核，但是api感觉简单好用更多。后台操作的用法和Flask-Admin基本差不多，最重要的是example的代表性很好，对flask项目的模块管理又重新学习了一下。</p>
 
-<p>作为一个前端，当然最重要的还是对CKEditor的学习啦，在这里还是赞一下CKEditor4的改版ui，真是很清新。上手很快，基本就是把存成在html格式放在数据库里，提取信息的问题上花时间搜索的有点多，结果居然在django的讨论帖上发现直接{% autoescaping off %}就行了。可能django和flask用的html渲染差不多都是jinja，所以也比较通用。后来查了一下应该也是可以直接通过js的方法来反转义的，就是一些标签的转义而已。还有没解决好的问题就是图片上传和浏览的问题，可能还得用上ckfinder，过几天也得好好研究一下源码。</p>
+<p>作为一个前端，当然最重要的还是对CKEditor的学习啦，在这里还是赞一下CKEditor4的改版ui，真是很清新。上手很快，基本就是把存成在html格式放在数据库里，提取信息的问题上花时间搜索的有点多，结果居然在django的讨论帖上发现直接autoescaping off就行了。可能django和flask用的html渲染差不多都是jinja，所以也比较通用。后来查了一下应该也是可以直接通过js的方法来反转义的，就是一些标签的转义而已。还有没解决好的问题就是图片上传和浏览的问题，可能还得用上ckfinder，过几天也得好好研究一下源码。</p>
 
 <p>代码库直接挂在<a href="https://github.com/sparkmorry/zaec">github-zaec</a>上了，学长说交东西不要太快，最好等deadline前几天再给人家，不然老是会被要求修改的（哈哈，真是太机智了）。等过几天，再慢慢把这个系统完善一下，尽量做成一个简单的cms。</p>
 ]]></content>
