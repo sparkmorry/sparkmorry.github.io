@@ -9,8 +9,8 @@
   <meta name="author" content="Mengli Xia">
 
   
-  <meta name="description" content="在看bootstrap的轮播插件源码的时候发现一种新的自调函数的写法（其实应该不新了），开头的一段就卡住了，原谅我是个菜鸟，就顺便记录一下。stackoverflow上有大神们的回答在这里，轮播的函数形式如下： !function ($) { //code here
-}(window.jQuery &hellip;">
+  <meta name="description" content="
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,73 +81,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/05/self-invoking-function-in-javascript/">Self-invoking Function in Javascript</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-05T23:31:52+08:00" pubdate data-updated="true">Feb 5<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在看bootstrap的轮播插件源码的时候发现一种新的自调函数的写法（其实应该不新了），开头的一段就卡住了，原谅我是个菜鸟，就顺便记录一下。stackoverflow上有大神们的回答在这里，轮播的函数形式如下：</p>
-
-<pre><code>!function ($) {
-   //code here
-}(window.jQuery);
-</code></pre>
-
-<p>通常自调函数来模仿块级作用域的方式是：</p>
-
-<pre><code>(function(parameters){
-     //这里是块级作用域
-})();
-</code></pre>
-
-<p>在function外面的这对括号使里面的匿名函数变成了函数表达式，并在之后马上调用。这个相当于：</p>
-
-<pre><code>var Name=function(parameters){
-   //这里是块级作用域
-}; 
-Name();  //调用匿名函数
-</code></pre>
-
-<p>函数表达式是在运行中以引用的方式赋值给一个变量的，如上面的函数创建的方式。而这里函数表达式和函数声明是不一样的，函数声明的通常形式如下：</p>
-
-<pre><code>function Name(parameters){
-    //code here
-}
-</code></pre>
-
-<p>函数声明会在程序刚开始运行的时候会被提升（所以可以在执行之后声明），但是并不执行，直到被调用的时候再执行。</p>
-
-<p>所以与括号作用相同的function前面的感叹号，因为括号的优先级高于感叹号，感叹号使得后面的一整串内容变成了一个bool表达式，编译器就会直接运行这个表达式了。这个表达式是个匿名函数，传入了一个参数，这里命名成$，其实无所谓是什么，只是一个形参，并在自调的时候把jQuery对象传进去，这里的jQuery对象是个全局变量，所以是windows.jQuery</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -709,10 +642,6 @@ if __name__ == '__main__':
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/04/05/jin-qi-xiao-jie/">近期小结</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2014/04/05/flask-peewee/">Flask-Peewee</a>
       </li>
     
@@ -728,12 +657,16 @@ if __name__ == '__main__':
         <a href="/blog/2014/02/23/css-crossbrowser-compatibility/">CSS Crossbrowser Compatibility</a>
       </li>
     
+      <li class="post">
+        <a href="/blog/2014/02/21/how-css-visual-formatting-model-works/">How CSS Visual Formatting Model Works</a>
+      </li>
+    
   </ul>
 </section>
 
 <section>
 <h1>Category</h1>
-<span class='categories_tag'> <a href='/blog/categories/assembly' style='font-size: 108.57142857142857%'>Assembly(1)</a>  <a href='/blog/categories/ckeditor' style='font-size: 108.57142857142857%'>Ckeditor(1)</a>  <a href='/blog/categories/computer-graph' style='font-size: 134.28571428571428%'>Computer graph(4)</a>  <a href='/blog/categories/computer-vision' style='font-size: 108.57142857142857%'>Computer vision(1)</a>  <a href='/blog/categories/css' style='font-size: 125.71428571428572%'>Css(3)</a>  <a href='/blog/categories/flask' style='font-size: 108.57142857142857%'>Flask(1)</a>  <a href='/blog/categories/image-processing' style='font-size: 108.57142857142857%'>Image processing(1)</a>  <a href='/blog/categories/javascript' style='font-size: 160.0%'>Javascript(7)</a>  <a href='/blog/categories/life' style='font-size: 117.14285714285714%'>Life(2)</a>  <a href='/blog/categories/mac' style='font-size: 117.14285714285714%'>Mac(2)</a>  <a href='/blog/categories/octopress' style='font-size: 108.57142857142857%'>Octopress(1)</a>  <a href='/blog/categories/opencv' style='font-size: 108.57142857142857%'>Opencv(1)</a>  <a href='/blog/categories/pil' style='font-size: 108.57142857142857%'>Pil(1)</a>  <a href='/blog/categories/python' style='font-size: 117.14285714285714%'>Python(2)</a>  <a href='/blog/categories/thoughts' style='font-size: 125.71428571428572%'>Thoughts(3)</a> </span>
+<span class='categories_tag'> <a href='/blog/categories/assembly' style='font-size: 108.57142857142857%'>Assembly(1)</a>  <a href='/blog/categories/ckeditor' style='font-size: 108.57142857142857%'>Ckeditor(1)</a>  <a href='/blog/categories/computer-graph' style='font-size: 134.28571428571428%'>Computer graph(4)</a>  <a href='/blog/categories/computer-vision' style='font-size: 108.57142857142857%'>Computer vision(1)</a>  <a href='/blog/categories/css' style='font-size: 125.71428571428572%'>Css(3)</a>  <a href='/blog/categories/flask' style='font-size: 108.57142857142857%'>Flask(1)</a>  <a href='/blog/categories/image-processing' style='font-size: 108.57142857142857%'>Image processing(1)</a>  <a href='/blog/categories/javascript' style='font-size: 160.0%'>Javascript(7)</a>  <a href='/blog/categories/life' style='font-size: 108.57142857142857%'>Life(1)</a>  <a href='/blog/categories/mac' style='font-size: 117.14285714285714%'>Mac(2)</a>  <a href='/blog/categories/octopress' style='font-size: 108.57142857142857%'>Octopress(1)</a>  <a href='/blog/categories/opencv' style='font-size: 108.57142857142857%'>Opencv(1)</a>  <a href='/blog/categories/pil' style='font-size: 108.57142857142857%'>Pil(1)</a>  <a href='/blog/categories/python' style='font-size: 117.14285714285714%'>Python(2)</a>  <a href='/blog/categories/thoughts' style='font-size: 117.14285714285714%'>Thoughts(2)</a> </span>
 </section>
 
 
