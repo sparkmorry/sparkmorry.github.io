@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ckeditor | Morry's Blog]]></title>
   <link href="http://sparkmorry.github.io/blog/categories/ckeditor/atom.xml" rel="self"/>
   <link href="http://sparkmorry.github.io/"/>
-  <updated>2014-04-07T12:47:21+08:00</updated>
+  <updated>2014-04-07T12:49:04+08:00</updated>
   <id>http://sparkmorry.github.io/</id>
   <author>
     <name><![CDATA[Mengli Xia]]></name>
@@ -18,7 +18,7 @@
     <link href="http://sparkmorry.github.io/blog/2014/04/05/flask-peewee/"/>
     <updated>2014-04-05T12:33:52+08:00</updated>
     <id>http://sparkmorry.github.io/blog/2014/04/05/flask-peewee</id>
-    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;发现自己这段时间越来越浮躁起来，总是赶着时间完成项目，好久没有安静下来研究一些什么东西了。一本小说都看了一个月才看完，第一张不知道拿起放下看了多少遍，趁着坐火车的时间才看了下来，更别说画画了。前几天接到校友会组织创业大赛的一个网站，顺便要帮忙写个后台，因为正好室友实验室课题组要建个主页，也要做个简单的发布系统让她后续好简单点发布。想想功能也简单，就想顺手用最熟悉的框架flask做了吧，虽然知道用flask来作这种东西真是有点作死的节奏。也发现了现在人的审美也慢慢提高，对设计和体验也越来越在乎，好看的网站越来越多，所以很多早几年拿wordpress或者直接拖模版的网页已经让人越来越不能忍了。正好赶上了网页换代的好时代，这样简单的活光在校内的需求都这么大，就想自己顺便琢磨琢磨把整个系统完善一下，尽量以后可以多复用一点。</p>
+    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;发现自己这段时间越来越浮躁起来，总是赶着时间完成项目，好久没有安静下来研究一些什么东西了。一本小说都看了一个月才看完，第一张不知道拿起放下看了多少遍，趁着坐火车的时间才看了下来，更别说画画了。前几天接到校友会组织创业大赛的一个网站，顺便要帮忙写个后台，因为正好室友实验室课题组要建个主页，也要做个简单的发布系统让她后续好简单点发布。想想功能也简单，就想顺手用最熟悉的框架flask做了吧，虽然知道用flask来作这种东西真是有点作死的节奏。写的时候就觉得跟当时学flask时候的心境真的相差太多，真是特别怀念当年天天泡图书馆的日子。也发现了现在人的审美也慢慢提高，对设计和体验也越来越在乎，好看的网站越来越多，所以很多早几年拿wordpress或者直接拖模版的网页已经让人越来越不能忍了。正好赶上了网页换代的好时代，这样简单的活光在校内的需求都这么大，就想自己顺便琢磨琢磨把整个系统完善一下，尽量以后可以多复用一点。</p>
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;先总结一下最近研究下来几个插件：</p>
 
